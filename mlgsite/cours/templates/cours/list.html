@@ -1,0 +1,22 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Cours {% endblock %}
+{% block content %}
+
+
+    <h1>Cours organisés </h1>
+    <div class="cours-div">
+
+        <ul>
+            <li><h3><a href="{% url 'english-lessons' %}">Anglais | English </a></h3></li>
+            <li><h3><a href="{% url 'maths-lessons' %}">Mathématiques | Mathematics</a></h3></li><br>
+
+        </ul>
+    </div>
+
+
+{% endblock %}
+
+
+
+{% block aside %} {% endblock %}

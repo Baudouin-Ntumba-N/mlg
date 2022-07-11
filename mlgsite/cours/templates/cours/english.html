@@ -1,0 +1,56 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Anglais {% endblock %}
+{% block content %}
+<section>
+
+    <h1> Cours d'Anglais </h1>
+
+    <div class="english-div">
+
+        <b> LEÇONS D'ANGLAIS</b>
+
+        {% if lessons %}
+
+        <ul>
+
+            {% for lesson in lessons %}
+
+
+            <li><b> <a href="{% url 'englesson-details' lesson.slug %}">{{lesson.title}}</a></b></li>
+
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+        <hr>
+
+        <b> VIDEOS</b>
+
+        {% if videolessons %}
+
+        {% for videolesson in videolessons %}
+        <div style="border:2px solid rgb(70, 20, 60);width:65%;text-align:center;margin-bottom:20px;">
+
+            <video src="/media/{{ videolesson.video_file }}" controls="controls" width="100%"></video>
+
+            <br><b> {{ videolesson.title }}</b>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+    </div>
+
+
+
+    <a href="{% url 'cours'%}">Retour</a>
+
+</section>
+{% endblock %}
+
+
+{% block aside %} <aside></aside>
+{% endblock %}

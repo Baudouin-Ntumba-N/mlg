@@ -1,0 +1,26 @@
+{% extends 'base_template.html'%}
+
+{% block title %} {{lesson_details.title}} {% endblock %}
+{% block content %}
+
+<section>
+
+
+    <div class="details">
+
+
+        <h1>{{lesson_details.title}}</h1>
+
+        {{ lesson_details.content}}
+
+
+
+        <a href="{% url 'maths-lessons' %}">Retour</a>
+
+
+    </div>
+
+
+</section>
+
+{% endblock %}
