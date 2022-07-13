@@ -1,0 +1,39 @@
+{% extends 'base_template.html'%}
+{% block titre %} About MLG {% endblock %}
+{% block content %}
+
+<section>
+
+
+
+  <div class="presentation">
+    <p>
+      MLG est une plateforme qui vous propose des cours d'<a href="{% url 'english-lessons' %}">anglais</a> et des <a href="{% url 'maths-lessons' %}">mathématiques</a> pouvant vous aider à réussir vos carrières tant scientifiques que professionnelles.
+    </p>
+    <i>
+      Vous retrouverez aussi <a href="{% url 'articles' %}">nos articles</a> sur des sujets particuliers ayant trait à l'anglais ou aux mathématiques. </i>
+    <br />
+
+  </div>
+  <!-- fin div présentation --> <br />
+
+
+  <div class='formoreinfo'>
+
+    <b>Pour plus d'informations:</b><br><br>
+
+
+
+    Tél: +243895747312 <br><br>
+
+    <a href=" https://free.facebook.com/MLG-Learning-English-106973327498292/?" target="_blank"><img src="/media/images/fcbk.JPG" width="35" height="35" /></a>
+
+    <a href="http://www.whatsapp.com"><img src="/media/images/whatsapplg.JPG" width="35" height="35" /></a>
+
+    <a href="mailto:bntumbanyembwe@gmail.com"><img src="/media/images/emaillg.jpg" width="35" height="35" /></a>
+
+  </div>
+
+</section>
+
+{% endblock %}

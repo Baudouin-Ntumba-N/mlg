@@ -1,0 +1,53 @@
+{% extends 'base_template.html'%}
+{% load learning_tags %}
+
+{% block title %} Le panier {% endblock %}
+
+{% block content %}
+
+<h1>
+    Votre panier
+</h1>
+<table class="documents-list" style="width:80%;border-collapse:collapse;" border="1">
+    <thead style="border:2px solid rgb(70, 20, 60);font-weight:bold;">
+        <td>Document</td><td>Quantité</td><td>Coût unitaire</td><td>Total</td>
+    </thead>
+    {% for order in orders %}
+
+    <tr class="doc-tr"><td>{{order.document.title}}</td> <td>{{order.quantity}}</td><td>{{order.unit_price}} $</td><td>{{ order.order_cost }} $</td></tr><br>
+
+    {% endfor %}
+</table>
+
+<div style="width:80%;font-weight:bold;color:darkgreen;border:2px solid darkgreen;">
+    Coût total: {{total_cost}} $
+</div>
+
+<br>
+
+<button style="background:white;border:2px solid darkred;"><a style="color:darkred;text-decoration:none;font-weight:bold;" href="{% url 'delete-cart' %}">Supprimer le panier</a></button>
+<hr>
+
+{% endblock %}
+
+
+{% block aside %}
+<div>
+
+    <ul>
+
+        <h3>
+            COURS
+        </h3>
+
+        <li><b><a href="{% url 'english-lessons' %}">Cours d'anglais</a></b></li>
+
+        <li><b><a href="{% url 'maths-lessons' %}">Cours de Maths</a></b></li>
+
+        <br>
+
+    </ul>
+
+</div>
+
+{% endblock %}

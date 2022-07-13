@@ -1,0 +1,50 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Réponse {% endblock %}
+
+{% block content %}
+
+
+
+    {% if comment %}<div class="details">
+
+
+        <div class="comments-block">
+            <b><img src="/media/{{ comment.writer.photo}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{ comment.writer.first_name }}</span></b>
+            <p>
+                {{ comment.comment_content }}
+            </p>
+            <br><br>
+        </div>
+
+
+        <div class="replyform">
+
+            <b>Répondre</b>
+
+
+            <form action="{% url 'replying' %}" method="POST">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="reply_recipient" value="{{comment.writer.id}}" />
+
+                <textarea cols="20", rows="10" name="reply_content"> </textarea>
+
+                <input type="hidden" name="comment_id" value="{{comment.id}}" />
+
+                <br>
+
+              <button style="float:right;" type="submit"> Envoyer </button>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+    {% endif %}
+
+
+{% endblock %}

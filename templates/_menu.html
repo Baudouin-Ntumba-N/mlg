@@ -1,0 +1,37 @@
+<div id="menu">
+
+
+  <a href="{% url 'home' %}"><div>Accueil</div></a>
+
+
+
+  <a href="{% url 'contact' %}"><div>Contact</div></a>
+
+
+
+  <a href="{% url 'cours' %}"><div>Cours </div></a>
+
+
+  <a href="{% url 'signup' %}"><div>S'inscrire</div></a>
+
+
+  <a href="{% url 'about' %}"><div>About</div> </a>
+
+
+
+<a href="{% url 'articles'%}"><div> Articles</div></a>
+
+
+
+<a href="{% url 'documents-list' %}"><div>Documents</div></a>
+
+
+ {% if user.is_authenticated %}
+  <a href="{% url 'logout' %}"><div style="color:rgb(70, 20, 60);font-weight:bold;">Déconnexion</div></a>
+{% endif %}
+{% if not user.is_authenticated %}
+  <a href="{% url 'login' %}"><div style="color:rgb(70, 20, 60);font-weight:bold;">Connexion</div></a>
+{% endif %}
+
+
+</div>

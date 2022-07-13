@@ -1,0 +1,56 @@
+{% extends 'base_template.html' %}
+
+{% block title %} Mathématiques {% endblock %}
+{% block content %}
+
+<section>
+
+    <h1>Cours de Mathématiques</h1>
+
+    <div class="maths-div">
+
+        <b> LEÇONS DE MATHS </b>
+
+        {% if lessons %}
+
+        <ul>
+
+            {% for lesson in lessons %}
+
+            <li><b><a href="{% url 'mathslesson-details' lesson.slug %}">{{lesson.title}}</a></b></li>
+
+            {% endfor %}
+
+        </ul>
+
+        {% endif %}
+
+        <hr>
+
+        <b> VIDEOS</b>
+
+        {% if videolessons %}
+
+        {% for videolesson in videolessons %}
+         <div style="border:2px solid rgb(70, 20, 60);width:65%;text-align:center;margin-bottom:20px;">
+
+            <video src="{{ videolesson.video_file.url }}" controls="controls" width="100%"></video>
+
+            <br><b> {{ videolesson.title }}</b>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+    </div>
+
+
+    <a href="{% url 'cours' %}">Retour</a>
+
+
+</section>
+
+{% endblock %}
+
+
+{% block aside %} <aside></aside>
+{% endblock %}

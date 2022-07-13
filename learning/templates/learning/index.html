@@ -1,0 +1,131 @@
+{% extends 'base_template.html' %}
+
+{% block title %} Page d'accueil {% endblock %}
+
+{% block content %}
+
+
+<div class="mlg-home">
+
+  <div>
+    <!-- <img src="media/images/english-maths.png" /> -->
+   {% if home_cover_image %}
+    <img src="{{home_cover_image.image.url}}" />
+   {% endif %}
+  </div>
+
+  <div class="intro-mlg">
+    <span>Apprenez les <b>mathématiques</b> et l'<b>anglais</b>, et réussissez votre carrière de chercheur scientifique en brisant les frontières linguistiques.</span>
+  </div>
+
+</div>
+
+<br><br>
+
+<p style="float:left;font-weight:bold;margin-left:10px;">
+  Découvrez <a href="{% url 'cours' %}">nos cours</a> et <a href="{% url 'articles'%}">nos articles</a> ...
+</p>
+<br><br>
+
+{% if articles %}
+
+<div class="nosarticles">
+
+  {% for article in articles %}
+  {% autoescape off%}
+
+
+  <div class="homearticle">
+
+
+    <div>
+
+      <a href="{% url 'article-details' article.slug %}">
+
+
+
+        <img src="{{ article.photo.url }}" alt="photo" />
+
+      </a>
+    </div>
+
+    <span class="categorie">{{ article.categorie}}</span>
+    <br>
+    <span style="font-weight:500;font-size:20px;"> <a href="{% url 'article-details' article.slug %}">{{article.title}}</a></span>
+    <br>
+    <a href="{% url 'article-details' article.slug %}">{{article.content|truncatewords:15}}</a>
+    <br>
+
+  </div>
+
+
+  {% endautoescape %}
+  {% endfor %}
+  <br>
+</div>
+<a href="{% url 'articles' %}">Voir plus d'articles</a><br>
+
+{% endif %}
+
+{% endblock %}
+
+{% block aside %}
+
+<div class="aside-main-divs">
+
+  <div class="aside-header-div">
+    <h4>
+      NOS COURS
+    </h4>
+  </div>
+  <ul>
+    <li><b><a href="{% url 'english-lessons' %}">Anglais</a></b></li>
+
+    <li><b><a href="{% url 'maths-lessons' %}">Maths</a></b></li>
+
+    <br>
+  </ul>
+</div>
+
+
+<div class="aside-main-divs">
+  <div class="aside-header-div">
+    <h4>
+      ARTICLES RECENTS
+    </h4>
+  </div>
+  <ul>
+    {% for article in articles %}
+
+    <li><b><a href="{% url 'article-details' article.slug %}">{{article.title}}</a></b></li> <br>
+
+    {% endfor %}
+  </ul>
+  <br>
+
+</div>
+
+
+<div class="aside-main-divs">
+  <div class="aside-header-div">
+    <h4>
+      DOCUMENTS RECENTS
+    </h4>
+  </div>
+  <ul>
+    {% for document in documents %}
+    <b><li><a href="{% url 'doc-details' document.slug %}">{{document.title}}</a></li></b> <br>
+
+    {% endfor %}
+  </ul>
+  <br>
+
+</div>
+
+
+{% if user_articles %}
+{{ user_articles }}
+{% endif %}
+
+
+{% endblock %}

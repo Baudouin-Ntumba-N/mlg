@@ -1,0 +1,87 @@
+
+{% extends 'base_template.html' %}
+
+{% block title %} Page d'inscription {% endblock %}
+
+   {% block content %}
+
+{% if signupError %}
+  <span style="color:red;">{{signupError}}</span>
+{% endif %}
+    <h1>
+        Inscrivez-vous
+    </h1>
+
+    <fieldset class='signup-form'>
+        <form enctype="multipart/form-data" action="{% url 'signup'%}" method="POST" class="post-form">
+
+            {% csrf_token %}
+
+            <div class="signup-form-div">
+                <div>
+                    Nom d'utilisateur:
+                </div>
+
+                <div>
+                  <input type='text' name='username' />
+                </div>
+
+              <div>
+                    Prénom:
+                </div>
+
+
+                <div>
+                    <input name="first_name" type="text" />
+                </div>
+
+<div>
+                    Nom:
+                </div>
+
+                <div>
+                    <input name="last_name" type="text" />
+                </div>
+
+
+
+                <div>
+                    Email:
+                </div>
+
+                <div>
+                    <input type='email' name='email' />
+                </div>
+
+               <br>
+
+                <div>
+                    Mot de passe:
+                </div>
+
+                <div>
+                   <input type='password' name='password' />
+                </div>
+
+
+            </div>
+
+            <br>
+            <button type="reset" class="reset-btn"> Annuler  </button>
+
+            <button type="submit" class="save-btn"> Inscription </button>
+
+          <br>
+
+        </form>
+
+
+    </fieldset>
+    {% endblock %}
+
+
+    {% block aside %}
+
+    MLG est votre meilleur endroit pour réussir votre intégration professionnelle !
+
+    {% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Detail sur l'article {% endblock %}
+
+{% block content %}
+
+{% if article %}
+
+  <div class="details">
+
+   {% autoescape off %}
+
+    <div style="background:white;">
+
+        <span style="color:gray;font-size:13px;">Mis à jour le {{ article.updated_on}} UTC</span><br>
+
+      <h1>{{ article.title }}</h1>
+        <img src="{{ article.photo.url }}" alt="image" />
+        <p>
+            {{ article.content }}
+        </p>
+        <span style="color:gray;font-size:13px;"> créé le {{ article.pub_date}} UTC</span><br><br>
+
+    </div>
+    <br>
+    <hr>
+
+    Laissez un commentaire
+    <!--- debut comment form -->
+    <form action="{% url 'comment' %}" method="POST">
+        {% csrf_token %}
+
+        <input name="article_slug" type="hidden" value="{{article.slug}}" />
+
+        <div style="width:100%;">
+            <textarea  name="comment" cols="100" rows="8"></textarea> <br>
+
+          <button style="float:right;margin-right:10px;" type="submit">Envoyer</button> <br>
+
+        </div>
+
+
+    </form>
+    <!-- fin comment form -->
+
+    <!-- les commentaires -->
+    <div>
+        <br>
+        <b>Commentaires</b><br><br>
+
+        {% for comment in comments %}
+        <div class="comments-block">
+            {%if comment.writer.id == 1 %}
+
+          <b><img src="/media/{{comment.writer.photo}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{comment.writer.first_name}} <span style="color:white;padding:5px;font-size:12px;background-color:darkgreen;">Auteur</span></span></b>         <p>
+                {{comment.comment_content}}
+            </p>
+            <span style="color:gray;font-size:13px;">{{comment.post_date}} UTC</span><br><br>
+
+            {% endif %}
+
+
+            {% if comment.writer.id != 1 %}
+
+          <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;"/> <span class="comment-prenom">{{comment.writer.first_name}}</span></b>
+            <p>
+                {{comment.comment_content}}
+            </p>
+            <span style="color:gray;font-size:13px;">{{comment.post_date}} UTC</span><br><br>
+
+            {% endif %}
+
+            <a href="{% url 'reply' comment.id %}"> <button style="margin-left:20px; float:left;color:darkblue;background:lightgray;border:0px solid blue;border-radius:5px;"> Répondre </button></a>
+
+
+<button style="float:right;border-radius:3px;background-color:lightgray;border:0px solid blue;">
+  <a style="text-decoration:none;color:darkblue;" href="{% url 'comment_replies' comment.id %}">{{comment.replies.count}} réponse(s)</a>
+          </button>
+            <br>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+    <br>
+
+
+{% endautoescape %}
+
+</div>
+
+
+{% endif %}
+
+
+{% if not article %}
+
+<a href="{% url 'articles' %}">Voir nos articles</a>
+
+{% endif %}
+
+
+
+
+{% endblock %}

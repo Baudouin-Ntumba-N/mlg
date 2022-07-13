@@ -1,0 +1,29 @@
+{% extends 'base_template.html'%}
+
+{% block title %} lesson_details.title {% endblock %}
+{% block content %}
+
+<section>
+
+    <div class="details">
+
+        {% if lesson_details %}
+        {% autoescape off %}
+        <h1>{{lesson_details.title}}</h1>
+
+        {{ lesson_details.content}}
+
+        {% endautoescape %}
+
+        {% endif %}
+
+
+    </div>
+
+
+    <br><br><a href="{% url 'english-lessons' %}">Retour</a>
+
+
+</section>
+
+{% endblock %}
