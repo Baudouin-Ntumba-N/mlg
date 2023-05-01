@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '@8lj4ezl9xv#qdx&9ltys1%f0q*zi(1092b15h(a38t(71jep1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bdnntumbanyembwe.pythonanywhere.com']
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
+    'ckeditor_uploader',
     'learning',
     'articles',
     'cours',
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
 
 
 ]
+#DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +84,7 @@ WSGI_APPLICATION = 'mlgsite.wsgi.application'
 
 #https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+"""
 DATABASES = {
   'default': {
        'ENGINE': 'django.db.backends.sqlite3',
@@ -88,17 +92,27 @@ DATABASES = {
    }
 }
 
+"""
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'mlgdb',
-#         'HOST': '127.0.0.1',
-#         'USER': 'root',
-#         'PASSWORD': 'bdn18mars',
-#         'PORT':3306,
-#     }
-# }
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'bdnntumbanyembwe$mymlgdb',
+         'HOST': 'bdnntumbanyembwe.mysql.pythonanywhere-services.com',
+         'USER': 'bdnntumbanyembwe',
+         'PASSWORD': 'bdn20190925mlg',
+         'PORT':'3306',
+         'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+            'charset': 'utf8mb4',
+            'auth_plugin': 'mysql_native_password',
+            "autocommit": True,
+   }
+
+}
+}
+
+
 
 
 # Password validation
@@ -139,9 +153,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = '/home/bdnntumbanyembwe/mlg/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '/home/bdnntumbanyembwe/mlg/media')
 
 MEDIA_URL = '/media/'
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 AUTH_USER_MODEL = 'learning.Inscrit'
 
@@ -153,12 +172,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 
-EMAIL_HOST_USER = 'bntumbanyembwe@gmail.com'
+EMAIL_HOST_USER = 'bdnntumba@gmail.com'
 
-EMAIL_HOST_PASSWORD = '19960318'
+EMAIL_HOST_PASSWORD = 'virtmkkhyyfobash'
 
-EMAIL_PORT = 587
+EMAIL_PORT = 465
 
-EMAIL_USER_TLS = False
+EMAIL_USER_TLS = True
 
 EMAIL_USER_SSL = False

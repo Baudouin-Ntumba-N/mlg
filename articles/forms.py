@@ -1,16 +1,32 @@
 from django import forms
+from .models import Article
+
+
+
+
+class ArticleForm(forms.ModelForm):
+
+  class Meta:
+    model = Article
+    fields = ["id", "title", "categorie", "author", "content", "photo", "published"]
+
+class UpdateArticleForm(forms.ModelForm):
+
+  class Meta:
+    model = Article
+    fields = ["id", "title", "categorie", "author", "content", "photo", "published"]
+
+
+
+
 
 
 
 class ReplyForm(forms.Form):
 
-  reply_recipient = forms.CharField(widget = forms.HiddenInput())
-
   reply_content = forms.CharField(widget = forms.TextInput())
 
   comment_id = forms.CharField(widget = forms.HiddenInput())
-
-
 
 class CommentForm(forms.Form):
 
@@ -18,4 +34,4 @@ class CommentForm(forms.Form):
 
   article_slug = forms.CharField(widget = forms.HiddenInput())
 
-  comment = forms.CharField(widget = forms.TextInput())
+  content = forms.CharField(widget = forms.TextInput())

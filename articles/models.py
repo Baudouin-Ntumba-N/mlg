@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from learning.models import Categorie, Inscrit
+from learning.models import Categorie
 from django.template.defaultfilters import slugify
-
+from random import randrange
+from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 
@@ -22,11 +24,11 @@ class Article(models.Model):
 
   updated_on = models.DateTimeField(auto_now=True)
 
-  content = models.TextField(blank=True, verbose_name='Contenu')
+  content = RichTextUploadingField(blank=True, null=True)
 
   photo = models.ImageField(null=True, upload_to='images')
 
-  pub_date = models.DateTimeField(null=True)
+  pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
   published = models.BooleanField(default=False)
 
@@ -38,18 +40,15 @@ class Article(models.Model):
     if not self.slug:
       self.slug = slugify(self.title)
       super().save(*args, **kwargs)
+    elif self.slug != slugify(self.title):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
     else:
       super().save(*args, **kwargs)
 
-class Reponse(models.Model):
-    replier = models.ForeignKey(Inscrit, on_delete=models.CASCADE, null=True)
-    reply_recipient = models.ForeignKey(Inscrit, on_delete=models.CASCADE, null=True, related_name='reply_recipient')
-    reply_content = models.TextField(null=True, blank=True)
-    related_comment_id = models.IntegerField(null=True)
-    reply_date = models.DateTimeField(auto_now_add=True, null=True)
+  def get_absolute_url(self):
+      return reverse("article-details", kwargs={"slug": self.slug})
 
-    def __str__(self):
-      return self.reply_content
 
 
 class Comment(models.Model):
@@ -60,19 +59,39 @@ class Comment(models.Model):
 
     commented_article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True)
 
-    replies = models.ManyToManyField(Reponse)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 
     post_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    comment_token = models.CharField(blank=True, max_length=500)
 
 
     def __str__(self):
       return str(self.id)
 
-    def delele(self, *args, **kwargs):
-      for reply in self.replies.all():
-        reponse = Reponse.objects.get(pk=reply.id)
-        reponse.delete()
-      super().delete(*args, **kwargs)
+    def save(self, *args, **kwargs):
+      if not self.comment_token:
+
+        the_token = f"r{ str(randrange(15)) }b{self.comment_content[0]} {len(self.writer.first_name)} {self.commented_article.slug[0]}{ str(randrange(8)) } yQ{ str(randrange(4)) }x { str(randrange(9)) } {str((self.writer.id)*34)}{ str(self.commented_article.id) }{str((self.writer.id)*4)}E { str(randrange(7)) }w"
+        self.comment_token = slugify(the_token)
+        super().save(*args, **kwargs)
+      else:
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("comment-replies", kwargs={"comment_token": self.comment_token})
+
+    @property
+    def replies(self):
+        return Comment.objects.filter(parent=self)
+
+    @property
+    def is_parent(self):
+        if self.parent is None:
+            return True
+        else:
+            return False
+
 
 
 
@@ -83,7 +102,3 @@ class CommentAdmin(admin.ModelAdmin):
   list_filter =('writer',)
 
 
-
-class ReponseAdmin(admin.ModelAdmin):
-  list_display = ('id', 'replier', 'reply_recipient', 'reply_content', 'related_comment_id', 'reply_date')
-  list_filter = ('id', 'replier', 'reply_recipient', 'reply_content', 'related_comment_id', 'reply_date')

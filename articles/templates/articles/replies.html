@@ -11,7 +11,7 @@
         <b style="color:violet;">{{authen}}</b>
         {% endif %}
         <div style="text-align:left;" class="comments-block">
-            <b><img src="/media/{{comment.writer.photo}}" style="width:40px;height:40px;" /> <span class="comment-prenom2">{{comment.writer.first_name}}</span></b>
+            <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="comment-prenom2">{{comment.writer.first_name}}</span></b>
             <br>
             {{comment.comment_content}}
         </div>
@@ -22,17 +22,17 @@
 
         {% for reply in replies %}
 
-        {%if reply.replier.id == 1 %}
+        {%if reply.writer.id == 1 %}
 
         <div class="reply">
 
-            <b><img src="{{ reply.replier.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.replier.first_name}} <span style="color:white;font-size:12px;padding:3px;background-color:darkgreen;"> Auteur</span></span></b><br><br>
+            <b><img src="{{ reply.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.writer.first_name}} <span style="color:white;font-size:12px;padding:3px;background-color:darkgreen;"> Auteur</span></span></b><br><br>
 
             {% autoescape off %}
 
-            {{reply.reply_content}}<br>
+            {{reply.comment_content}}<br>
 
-          <br><span style="color:gray;font-size:13px;">{{reply.reply_date}} UTC </span>
+          <br><span style="color:gray;font-size:13px;">{{reply.post_date}} UTC </span>
 
             {% endautoescape %}
 
@@ -46,16 +46,16 @@
         </div>
         {% endif %}
 
-        {% if reply.replier.id != 1 %}
+        {% if reply.writer.id != 1 %}
 
         <div class="reply">
-            <b><img src="{{ reply.replier.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.replier.first_name}}</span></b><br><br>
+            <b><img src="{{ reply.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.writer.first_name}}</span></b><br><br>
 
             {% autoescape off %}
 
-            {{reply.reply_content}}<br>
+            {{reply.comment_content}}<br>
 
-            <br> <span style="color:gray;font-size:13px;">{{reply.reply_date}} UTC </span>
+            <br> <span style="color:gray;font-size:13px;">{{reply.post_date}} UTC </span>
 
             {% endautoescape %}
 
@@ -96,15 +96,14 @@
 
                 {% csrf_token %}
 
-                <input type="hidden" name="reply_recipient" value="{{comment.writer.id}}" />
                 <input type="hidden" name="comment_id" value="{{comment.id}}" />
 
                 <div>
-                    <textarea id="reply-textarea" cols="20", rows="10" name="reply_content"> </textarea>
+                    <textarea required  cols="20", rows="10" name="reply_content" > </textarea>
 
                     <br>
 
-                    <button style="float:right;margin-right:10px;" type="submit">Envoyer</button>
+                    <button type="submit">Envoyer</button>
 
                 </div>
 

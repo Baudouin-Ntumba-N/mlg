@@ -25,8 +25,9 @@
         </ul>
 
         {% endif %}
+    <hr>
+    <br><br><br>
 
-        <hr>
 
         <b> VIDEOS</b>
 
@@ -48,9 +49,34 @@
 
     <a href="{% url 'cours'%}">Retour</a>
 
+    <br>
+<hr>
+<b> Articles récents </b>
+
+{% if articles %}
+
+<div class="nosarticles">
+
+        {% for chaquearticle in articles %}
+
+        {% autoescape off %}
+
+        <div class="article">
+            <div>
+                <img src="{{chaquearticle.photo.url }}" alt="photo" />
+            </div>
+
+            <span class="categorie">{{chaquearticle.categorie}}</span><br>
+
+            <a href="{% url 'article-details' chaquearticle.slug %}"><b>{{chaquearticle.title}}</b><br> {{ chaquearticle.content|truncatewords:15 }}</a>
+        </div>
+        {% endautoescape %}
+        {% endfor %}
+
+    </div> <a href="{% url 'articles-english' %}"> Voir plus d'articles</a>
+  {% endif %}
+
 </section>
 {% endblock %}
 
 
-{% block aside %} <aside></aside>
-{% endblock %}

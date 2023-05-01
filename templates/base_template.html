@@ -5,7 +5,10 @@
     <title>{% block titre %}{% endblock %}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'learning/main.css' %}" type="text/css" />
+
+     <link rel="stylesheet" href="{% static 'learning/main1.css' %}" type="text/css" />
+     <link rel="stylesheet" href="{% static 'learning/main.css' %}" type="text/css" />
+
 
 
 
@@ -15,9 +18,21 @@
         //afficher le menu
 
 
- document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('#menu').style.display = 'none';
-   let a = 0;
+ document.addEventListener('DOMContentLoaded', function (){
+
+
+  if (window.innerWidth >= 900) {
+
+        document.querySelector('#menu').style.display = 'block';
+
+    } else {
+
+        document.querySelector('#menu').style.display = 'none';
+    }
+
+
+
+ let a = 0;
 
             document.querySelector('#menu-button').onclick = function () {
 
@@ -65,16 +80,20 @@
             <header>
 
               <div id="logo">
-	<a href = "{% url 'home' %}" id = "logo-link"><div style = "border-top:3px solid rgb(70, 20, 60); border-bottom:3px solid rgb(70, 20, 60);background:white;border-radius:10px;font-family:Arial;">
-	 <span style = "font-size:25px; font-weight:500;color:black">ML<span style="color:rgb(70, 20, 60);color:rgb(70, 20, 60);font-size:25px;">G</span> </span>
+	<a href = "{% url 'home' %}" id = "logo-link">
+
+	     <div style = "border-top:3px solid rgb(70, 20, 60); border-bottom:3px solid rgb(70, 20, 60);background:white;border-radius:10px;font-family:Arial;">
+
+	 <span style = "font-weight:500;color:black">ML<span style="color:rgb(70, 20, 60);color:rgb(70, 20, 60);">G</span> </span>
 
 </div>
 </a>
 <a href="{% url 'home' %}">
-  <span  class="mlg-meaning">Modern Learning Ground</span></a>
+  <span  class="mlg-meaning">Modern Learning Group</span></a>
 
-              </div> <nav>
+              </div>
 
+              <nav>
 
 
 
@@ -87,9 +106,13 @@
             </header>
 
 <div class="search">
-MLG Modern Learning Ground
 
-{% if user.cart %}
+    <div class="intro-mlg">
+    <h3> Développez vos compétences!</h3>  </div>
+
+
+
+    {% if user.cart %}
      <div style="background:white;border-radius:50px;width:50%;">
 
       <a style="text-decoration:none;color:darkgreen;font-weight:bold;" href="{% url 'cart' %}">Voir le panier ({{ user.cart.orders.count}})</a>
@@ -97,19 +120,25 @@ MLG Modern Learning Ground
      </div>
       {% endif %}
 
+      {% if login_msg %}
+       <div style="background:white;font-size:18px;border-radius:50px;width:50%;">
 
-          </div>
+         {{user.first_name}}, tu es connecté(e)...
 
-       <section>
+        </div>
+      {% endif %}
+ </div>
 
-
+        <section>
        {% block content %}
 
 
           {% endblock %}
-        </section>
 
-          <aside>{% block aside %} {% endblock %}</aside>
+</section>
+{% block edition %} {% endblock %}
+
+          {% block aside %} {% endblock %}
 
 
 
@@ -139,7 +168,7 @@ MLG Modern Learning Ground
 
 <br>
 
-© MLG 
+© MLG
 
           </footer>
         </center>

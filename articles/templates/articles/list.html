@@ -9,8 +9,13 @@
 
     <h1> Articles </h1>
 
+{% if user.is_superuser %}
+<p><b> <a href="{% url 'edit-article' %}"> Ajouter un article </a></b></p>
+{% endif %}
+
     {% if page %}
-    <div class="nosarticles">
+
+  <div class="nosarticles">
 
         {% for chaquearticle in page %}
 
@@ -23,12 +28,13 @@
 
             <span class="categorie">{{chaquearticle.categorie}}</span><br>
 
-            <a href="{% url 'article-details' chaquearticle.slug %}"><b>{{chaquearticle.title}}</b><br> {{ chaquearticle.content|truncatewords:15 }}</a>
+            <a href="{% url 'article-details' chaquearticle.slug %}"><b> <span class="title">{{chaquearticle.title}}</span></b><br> {{ chaquearticle.content|truncatewords:15 }}</a>
         </div>
         {% endautoescape %}
         {% endfor %}
 
     </div>
+
 
     {% endif %}
 

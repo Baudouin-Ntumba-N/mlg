@@ -10,7 +10,7 @@
 
 
         <div class="comments-block">
-            <b><img src="/media/{{ comment.writer.photo}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{ comment.writer.first_name }}</span></b>
+            <b><img src="{{ comment.writer.photo.url}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{ comment.writer.first_name }}</span></b>
             <p>
                 {{ comment.comment_content }}
             </p>
@@ -27,15 +27,14 @@
 
                 {% csrf_token %}
 
-                <input type="hidden" name="reply_recipient" value="{{comment.writer.id}}" />
 
-                <textarea cols="20", rows="10" name="reply_content"> </textarea>
+                <textarea required cols="20", rows="10" name="reply_content" > </textarea>
 
                 <input type="hidden" name="comment_id" value="{{comment.id}}" />
 
                 <br>
 
-              <button style="float:right;" type="submit"> Envoyer </button>
+              <button type="submit"> Envoyer </button>
 
 
             </form>

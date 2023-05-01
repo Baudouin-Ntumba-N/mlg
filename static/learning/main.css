@@ -1,0 +1,1022 @@
+@media{
+    body {
+
+        /*background: url('../learning/images/mlg-toile1.JPG'); */
+        background-color: rgb(70, 20, 60);
+        font-family: "Playfair Display",Helvetica, sans-serif, serif;
+
+    }
+    body a {
+
+        color: black;
+
+    }
+
+    body a:hover{
+        color:black;
+        font-weight:600;
+        text-decoration:underline;
+    }
+
+
+    #conteneur {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        background: white;
+        z-index: 0;
+    }
+
+
+    header {
+        text-align: center;
+        /*background: rgb(255, 255, 200);*/
+        background-color: white;
+        /*background-color:rgb(240, 240, 245);*/
+        width: 100%;
+        /*padding-bottom:5px;*/
+        box-shadow: 0px 0px 3px 0px;
+        height: 45px;
+        margin-bottom: 20px;
+        vertical-align: center;
+        position: fixed;
+
+        z-index: 99999999;
+
+    }
+
+    .search {
+        width: 100%;
+        height: 50px;
+        font-weight: 500;
+        font-size: ;
+        color: white;
+        /*background: linear-gradient(to bottom right, rgb(20, 10, 60), rgb(70, 10, 20));*/
+        background-color: rgb(70, 20, 60);
+        padding-top: 48px;
+        padding-bottom:20px;
+        z-index: 9999999;
+
+
+    }
+
+    .search a {
+        text-decoration: none;
+        color:white;
+    }
+    .search a:hover{
+        font-weight:bold;
+    }
+
+    #logo {
+        margin-top: 5px;
+        padding-left: 10px;
+        display: inline-block;
+
+        float: left;
+        z-index: 9999999;
+
+    }
+    #logo-link{
+        font-size:25px;
+    }
+    #logo a {
+        text-decoration: none;
+    }
+
+    .mlg-meaning {
+
+        display: none;
+
+    }
+
+    button {
+        border-radius: 10px;
+        background-color: rgb(70, 20, 60);
+        border: 0px solid rgb(70, 20, 60);
+        color: white;
+        height: 30px;
+        width: 100px;
+
+    }
+
+
+    #label-menu {
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        }
+    #menu {
+        display: none;
+        width: 100%;
+        text-align: left;
+        background-color: white;
+        z-index: 99999999;
+        list-style: none;
+        position: absolute;
+        top: 50px;
+        padding: 0px;
+        border-top: 1px solid lightgray;
+
+    }
+
+    #menu div {
+
+        height: 20px;
+        width: 100%;
+        padding: 15px;
+
+
+    }
+
+    #menu .signup-div{
+        font-weight:bold;
+    }
+    #menu a {
+
+        color: black;
+        text-decoration: none;
+
+    }
+
+    #menu-button {
+        position: absolute;
+        top: 5px;
+        width:50px;
+        right: 5px;
+        border: 0px solid white;
+        background-color: white;
+
+    }
+    #menu-button hr {
+        width: 23px;
+        height: 1.3px;
+        background-color: rgb(70, 20, 60);
+        border: 0.1px solid black;
+
+    }
+
+ .cours-div h3 {
+	font-size:24px;
+	 list-style-image: url('..learning/images/puces_rubrique.png');
+    padding-left: 2px;
+}
+
+
+    textarea {
+
+        font-family: Arial;
+
+    }
+
+    .login-btn {
+        background: rgb(70, 20, 60);
+        height: 40px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-top: 10px;
+
+    }
+    .contact-form-fieldset {
+
+        width: 85%;
+        padding: 20px;
+        border-radius: 4px;
+        border: 1px solid lightgray;
+        box-shadow: 1px 0px 20px lightgray;
+
+    }
+
+    #comment-form {
+        width: 90%;
+    }
+    .contact-form {
+        text-align: left;
+    }
+    .contact-form input, textarea {
+        width: 97%;
+        border-radius: 3px;
+        border: 1px solid lightgray;
+    }
+
+    /* on about */
+    .presentation {
+        margin: 5px;
+        border-radius: 10px;
+        border: 1px solid rgb(70, 20, 60);
+        padding: 10px;
+
+        font-size: 20px;
+        text-align: justify;
+        background-color: lightgray;
+
+    }
+    .formoreinfo {
+
+        text-align: left;
+        color: rgb(70, 20, 60);
+
+        padding: 10px;
+
+    }
+    .send-btn {
+        background: rgb(70, 20, 60);
+        color: white;
+        border: 1px solid black;
+    }
+    .login-form {
+
+        width: 100%;
+    }
+
+    .login-btn a {
+        color: white;
+        text-decoration: none;
+    }
+    .login-form div input {
+        height: 30px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        width: 97%;
+        border: 1px solid lightgray;
+    }
+    .login-form div {
+        align-items: center;
+    }
+
+  .signup-buttons .save-btn{
+      float : right;
+
+  }
+
+
+
+    section {
+        display: block;
+        align-items: center;
+        margin-bottom: 50px;
+        min-height: 200px;
+
+    }
+
+    .documents-list {
+        width: 95%;
+        border: 1px solid lightgray;
+
+    }
+
+    .documents-list tr {
+
+        height: 40px;
+
+    }
+    .documents-list td {
+        padding: 10px;
+    }
+    .documents-list button {
+        background-color: white;
+        border: 1px solid green;
+        border-radius: 3px;
+    }
+    .documents-list button a {
+        color: green;
+        text-decoration: none;
+    }
+    .doc-tr:nth-child(odd) {
+        background-color: rgb(240, 240, 245);
+    }
+
+    /* the big */
+    #download-btn {
+        background-color: green;
+        height: 50px;
+        color: white;
+        border-radius: 10px;
+        width: 200px;
+    }
+    aside {
+        display: block;
+        text-align: left;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+
+
+    }
+
+  aside a{
+    text-decoration:none;
+  }
+
+  .aside-main-divs{
+    background : rgb(220, 220, 230);
+  }
+   .aside-header-div{
+    background-color:rgb(70, 20, 60);
+    text-align:left;
+    padding-left:10px;
+    color:white;
+
+  }
+
+
+    footer {
+        background: rgb(220,220, 230);
+        height: 200px;
+        padding-bottom: 10px;
+        margin-top: 10px;
+    }
+    footer img {
+        border-radius: 20px;
+    }
+
+    footer a{
+      text-decoration:none;
+    }
+
+
+    div.mlg-home {
+        color: white;
+        width: 80%;
+        font-weight: 500;
+        margin-top:20px;
+
+    }
+
+
+
+    .intro-mlg a {
+
+        color:white;
+
+    }
+
+    div.mlg-home img {
+        width: 100%;
+    }
+    div.mlg-home a {
+
+        color: white;
+        font-weight: 500;
+    }
+
+    .top-article img {
+        width: 100%;
+
+    }
+    div.top-content {
+        color: white;
+        background: black;
+        padding: 2%;
+
+    }
+    .nosarticles {
+
+        /* display: grid;
+    grid-template-columns: repeat(1, 300px);
+    grid-template-rows: repeat(3, 300px);*/
+
+        margin-top: 5px;
+
+    }
+
+
+    .article div {
+        max-height: 300px;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+
+
+
+    .homearticle {
+        max-height: 300px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        width: 100%;
+
+    }
+
+
+    .homearticle {
+        width: 85%;
+        height: 400px;
+        text-align: left;
+        margin-bottom: 20px;
+        padding: 10px;
+        background-color:rgb(240, 240, 240);
+
+
+
+
+    }
+    .homearticle a {
+        text-decoration: none;
+    }
+    .homearticle img {
+        width: 100%;
+        height: 50%;
+    }
+    .homearticle .categorie {
+        text-transform: uppercase;
+    }
+    .article {
+        text-align: left;
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color:rgb(240, 240, 240);
+
+    }
+
+
+    .details textarea {
+        padding-top: 10px;
+        height: 80px;
+        width:100%;
+    }
+    .article img {
+        width: 100%;
+        height: 70%;
+    }
+    .article a {
+        text-decoration: none;
+    }
+    .article a:hover {
+        text-decoration: underline;
+    }
+    .article .categorie {
+
+        font-family: Arial;
+        font-size: 12px;
+        color: rgb(0, 0, 70);
+        font-weight: bold;
+        text-transform: uppercase;
+
+    }
+    .article .title{
+        font-size: 20px;
+    }
+    .pagination {
+
+        width: 90%;
+
+    }
+
+    .pagin-cover {
+
+        padding: 5px;
+        border: 1px solid lightgray;
+        /*display:flex;*/
+
+    }
+    .pagin-cover div {
+        margin-right: 5px;
+        display: inline-block;
+    }
+
+    .pagin-cover button {
+        border: 1px solid lightgray;
+        background-color: rgb(70, 20, 60);
+        border-radius: 5px;
+
+    }
+    .pagin-cover a {
+        color: white;
+        text-decoration: none;
+    }
+    .page-num {
+        display: flex;
+        width: 60%;
+        overflow-y: auto;
+        background: blue;
+    }
+    .page-num button {
+        border: 1px solid lightgray;
+        margin-right: 5px;
+
+
+
+    }
+
+    legend {
+        background: white;
+    }
+    .details {
+        text-align: left;
+        padding: 10px;
+
+    }
+    .details img {
+        width: 100%;
+
+    }
+    .comments-block {
+        padding: 10px;
+        background: rgb(250, 250, 250);
+        border-radius: 10px;
+    }
+    .comments-block img {
+        border-radius: 30px;
+    }
+
+    .comments-to-mlg-div {
+        text-align: left;
+        width: 98%;
+    }
+    .comment-prenom {
+        position: relative;
+        bottom: 10px;
+    }
+
+    .comment-prenom2 {
+        position: relative;
+        bottom: 10px;
+    }
+    .replies-div {
+        margin-top: 20px;
+        padding-left: 5px;
+    }
+    .replyform {
+        text-align: left;
+        padding-right: 10px;
+    }
+    .replyform textarea {
+        width: 95%;
+        height: 45px;
+        border-radius: 5px;
+
+    }
+
+    .replyform input {
+        float: right;
+        position: relative;
+        right: 20px;
+    }
+    .reply {
+        border-radius: 10px;
+        text-align: left;
+        margin-bottom: 20px;
+
+        margin-left: 30px;
+        margin-right: 20px;
+        padding: 20px;
+        background-color: rgb(250, 250, 250);
+    }
+    .reply img {
+        border-radius: 30px;
+    }
+    .replier-prenom {
+        position: relative;
+        bottom: 10px;
+    }
+
+    .cours-div {
+        text-align: left;
+    }
+
+    .english-div, .maths-div, .geoscience-div {
+        padding: 20px;
+        text-align: left;
+    }
+    .signup-form {
+        text-align: left;
+        border: 1px solid lightgray;
+        width: 65%;
+        border-radius: 10px;
+        /* box-shadow:1px 0px 20px lightgray; */
+
+
+    }
+    .signup-form-div {
+        align-items: center;
+    }
+
+    .signup-form-div div input {
+        width: 97%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        height: 20px;
+        border-bottom: 2px solid lightgray;
+    }
+
+
+    .save-btn {
+        background: rgb(70, 20, 60);
+        color: white;
+    }
+
+    .login-form-fieldset {
+        width: 250px;
+        text-align: left;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+
+    }
+
+    .modify-form-div div input {
+        width: 98%;
+        border-radius: 5px;
+        height: 20px;
+        border: 1px solid lightgray;
+    }
+
+    .modify-form {
+        width: 80%;
+        height: 400px;
+        border: 1px solid lightgray;
+        border-radius:10px;
+    }
+
+
+    .modify-form-div div {
+        text-align: left;
+
+
+    }
+    .modify-form-div div img {
+
+        border-radius: 30px;
+
+    }
+
+
+
+    .simple-comment {
+        width: 75%;
+        border-radius: 5px;
+        border: 0px solid gray;
+        background-color: whitesmoke;
+    }
+
+    .videolessons {
+        width: 80%;
+        height: 300px;
+    }
+
+    .videolessons video {
+
+        width: 300px;
+        background: rgb(70, 20, 60);
+        position: relative;
+        left: 30px;
+    }
+
+}
+
+
+
+@media screen and (min-width: 900px) {
+
+    body {
+
+        /* background: url('../learning/images/mlg-toile1.JPG'); */
+
+    }
+
+    #conteneur {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        background: white;
+    }
+
+    header {
+        text-align: center;
+        /*background: rgb(240, 240, 245);*/
+        width: 100%;
+        height: 64px;
+
+        vertical-align: center;
+    }
+    .search {
+        padding-top: 70px;
+        border-bottom: 1px solid lightgray;
+    }
+    #logo {
+        margin-top: 12px;
+        padding-left: 20px;
+        display: inline-block;
+        font-size: 30px;
+        float: left;
+        margin-right: 50px;
+
+
+    }
+
+    #logo-link div span{
+        font-size:28px;
+
+    }
+
+    #logo div{
+        padding-top:2px;
+        height:35px;
+        margin-bottom:1px;
+    }
+
+    .mlg-meaning {
+
+        display: block;
+        font-size: 12px;
+        position: absolute;
+        top: 12px;
+        left: 85px;
+        width: 30px;
+        font-weight: bold;
+
+
+
+    }
+    #logo a {
+        text-decoration: none;
+    }
+
+    #label-menu {
+        position: absolute;
+        top: 10px;
+        right: 40px;
+    }
+
+    #menu-button {
+        position: absolute;
+        top: 13px;
+    }
+
+    #menu{
+       position:absolute;
+       top:9px;
+       right:10px;
+       width:80%;
+       border-top: 0px solid lightgray;
+    }
+
+    #menu div{
+        display:inline-block;
+        width:50px;
+        margin-right:1px;
+    }
+    #menu .signup-div{
+        margin-left:45px;
+        font-weight:bold;
+    }
+
+    #menu .login-div{
+        margin-left:1px;
+
+    }
+    #menu .logout-div{
+        margin-left:1px;
+
+    }
+
+    .document-list tr:nth-child(even) {
+        background-color: rgb(240, 240, 245);
+    }
+    .nosarticles {
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 50%);
+        /*grid-template-rows:repeat(3, 50%); */
+        grid-gap: 10px;
+
+        align-content: center;
+        border-radius: 3px;
+        /* border:1px solid lightgray;*/
+
+
+    }
+
+    .homearticles{
+       display:flex;
+    }
+
+   .homearticles .homearticle{
+    display:inline-block;
+    width: 40%;
+    height: 70%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+    div.mlg-home {
+
+
+        font-size: 40px;
+        align-content: center;
+        border-radius: 3px;
+        /* border:1px solid lightgray;*/
+
+
+    }
+
+
+
+
+    /*div.mlg-home img {}*/
+    /* contain presentation image*/
+    div.mlg-home div {
+        max-height: 650px;
+        overflow: hidden;
+    }
+
+    .article {
+
+        /*margin-bottom:10px;*/
+        background-color: rgb(240, 240, 240);
+        padding: 0px;
+        margin: 5px;
+        padding:10px;
+
+    }
+    .article div {
+        max-height: 300px;
+    }
+
+    .article img {
+        width: 100%;
+        height: 70%;
+    }
+
+    .article .content {
+        height:50px;
+    }
+    .article a {
+        text-decoration: none;
+    }
+    .article a:hover {
+        text-decoration: underline;
+    }
+    .article .categorie {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Arial;
+        text-transform: uppercase;
+
+    }
+
+   .edition{
+      margin-left: 20%;
+   }
+
+    .details {
+        background-color: white;
+        padding: 10px;
+    }
+
+    .details img {
+        width: 60%;
+        margin: 20px;
+    }
+  .comment-div-textarea textarea{
+       width:50%;
+   }
+    .replyform textarea {
+        width: 98%;
+
+    }
+    .replyform input {
+        float: right;
+        position: relative;
+        right: 200px;
+    }
+    nav {
+        display: inline-block;
+        width: 60%;
+        font-family: Arial;
+        padding-bottom: 5px;
+    }
+
+
+    .comment-prenom {
+        position: relative;
+        bottom: 30px;
+    }
+
+    .comment-prenom2 {
+        position: relative;
+        bottom: 10px;
+
+    }
+
+    .contact-form-fieldset {
+
+        width: 60%;
+        padding: 20px;
+    }
+    .contact-form {
+        text-align: left;
+    }
+    .contact-form input, textarea {
+        width: 97%;
+        border-radius: 3px;
+        border: 1px solid gray;
+    }
+    .send-btn {
+        background: rgb(70, 20, 60);
+        color: white;
+        border: 1px solid black;
+    }
+
+
+    header span {
+        font-size: 14px;
+    }
+    nav a {
+        color: white;
+        font-weight: bold;
+        font-size: 10px;
+        text-decoration: none;
+    }
+
+
+
+
+    section {
+        display: inline-block;
+        /*border:1px solid lightgray;*/
+        min-height: 850px;
+        width:70%;
+    }
+
+
+
+    aside {
+
+        display: inline-block;
+        vertical-align: top;
+        /*border-left: 1px solid lightgray;*/
+        /*border-right:1px solid lightgray;*/
+        text-align: left;
+       /* border: 1px solid lightgray;*/
+         width:25%;
+    }
+
+    .signup-form-div div {
+        margin-bottom: 5px;
+    }
+    .signup-form-div div input {
+        width: 97%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+    }
+
+    .login-form div {
+        margin-bottom: 10px;
+    }
+    .login-form div input {
+        width: 95%;
+    }
+
+    .login-form {
+        align-items: center;
+        width: 100%;
+        padding-left: 2px;
+    }
+
+    .signup-form {
+        width: 275px;
+        height: 370px;
+    }
+
+    .modify-form {
+        width: 45%;
+        height: 420px;
+        border: 1px solid lightgray;
+    }
+
+    .modify-form-div div input {
+        width: 98%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+    }
+
+    .modify-form-div div {
+        text-align: left;
+    }
+    footer {
+
+        height: 500px;
+
+    }
+
+
+    h2 a {
+
+        font-size: 20px;
+        color: black;
+
+
+    }
+
+    .simple-comment {
+        width: 40%;
+    }
+}
+
+
+}

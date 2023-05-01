@@ -42,14 +42,15 @@
       <b>Format : {{ document.doc_format}}</b><br><br>
       <b>Pages : {{ document.pages_number }}</b><br><br>
       <b>Taille : {{ document.doc_file.size|sizify }} </b><br><br>
-       <b> Prix : {{ document.price }} $ </b><br>
+       <!-- <b> Prix : {{ document.price }} $ </b> --> <br>
        <br>
 
       {% if user.is_authenticated %}
-      <a href="{% url 'add-to-cart' document.slug %}"><button style="background:green;"> Ajouter dans le panier </button></a>
-      {% endif %}
-     <!-- <a href="/media/{{ document.doc_file }}" download="{{document.doc_file}}"><button id="download-btn"> Download now </button> </a>
-<br><br><div id="downloading-msg"> Téléchargement</div> -->
+
+          <a href="/media/{{ document.doc_file }}" download="{{document.doc_file}}"><button id="download-btn"> Download now </button> </a>
+          {% endif %}
+
+          <!-- <br><br><div id="downloading-msg"> Téléchargement</div> -->
     {% if not user.is_authenticated %}
     <a href="{% url 'login' %}">Connectez-vous</a> puis revenez continuer
     {% endif %}

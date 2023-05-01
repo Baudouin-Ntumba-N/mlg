@@ -8,7 +8,7 @@
 
     <div class="details">
 
-
+        {% autoescape off %}
         <h1>{{lesson_details.title}}</h1>
 
         {{ lesson_details.content}}
@@ -17,7 +17,7 @@
 
         <a href="{% url 'maths-lessons' %}">Retour</a>
 
-
+       {% endautoescape %}
     </div>
 
 

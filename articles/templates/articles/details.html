@@ -1,6 +1,6 @@
 {% extends 'base_template.html'%}
 
-{% block title %} Detail sur l'article {% endblock %}
+{% block title %} {{ article.title }} {% endblock %}
 
 {% block content %}
 
@@ -15,6 +15,15 @@
         <span style="color:gray;font-size:13px;">Mis à jour le {{ article.updated_on}} UTC</span><br>
 
       <h1>{{ article.title }}</h1>
+
+      <p><i> Par <b> {{ article.author.first_name }} {{ article.author.last_name }}</b> </i> </p>
+
+    {% if user.id == article.author.id %}
+
+     <b><a href="{% url 'update-article' article.slug %}"> Editer cet article </a></b> <br>
+
+     {% endif %}
+
         <img src="{{ article.photo.url }}" alt="image" />
         <p>
             {{ article.content }}
@@ -32,10 +41,10 @@
 
         <input name="article_slug" type="hidden" value="{{article.slug}}" />
 
-        <div style="width:100%;">
-            <textarea  name="comment" cols="100" rows="8"></textarea> <br>
+        <div class="comment-div-textarea">
+            <textarea required name="content" cols="100" rows="20"></textarea> <br>
 
-          <button style="float:right;margin-right:10px;" type="submit">Envoyer</button> <br>
+          <button type="submit">Envoyer</button> <br>
 
         </div>
 
@@ -46,21 +55,18 @@
     <!-- les commentaires -->
     <div>
         <br>
-        <b>Commentaires</b><br><br>
+        <b>{% if comments %}{{comments_number}}{% else %} 0 {% endif %} Commentaire(s)</b><br><br>
 
         {% for comment in comments %}
         <div class="comments-block">
-            {%if comment.writer.id == 1 %}
+            {%if comment.writer.is_superuser %}
 
-          <b><img src="/media/{{comment.writer.photo}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{comment.writer.first_name}} <span style="color:white;padding:5px;font-size:12px;background-color:darkgreen;">Auteur</span></span></b>         <p>
+          <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;" /><span class="comment-prenom">{{comment.writer.first_name}} <span style="color:white;padding:5px;font-size:12px;background-color:darkgreen;">Auteur</span></span></b>         <p>
                 {{comment.comment_content}}
             </p>
             <span style="color:gray;font-size:13px;">{{comment.post_date}} UTC</span><br><br>
 
-            {% endif %}
-
-
-            {% if comment.writer.id != 1 %}
+            {% else %}
 
           <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;"/> <span class="comment-prenom">{{comment.writer.first_name}}</span></b>
             <p>
@@ -70,13 +76,19 @@
 
             {% endif %}
 
-            <a href="{% url 'reply' comment.id %}"> <button style="margin-left:20px; float:left;color:darkblue;background:lightgray;border:0px solid blue;border-radius:5px;"> Répondre </button></a>
+            <a href="{% url 'reply' comment.comment_token %}"> <button style="margin-left:20px; float:left;color:darkblue;background:lightgray;border:0px solid blue;"> Répondre </button></a>
 
 
-<button style="float:right;border-radius:3px;background-color:lightgray;border:0px solid blue;">
-  <a style="text-decoration:none;color:darkblue;" href="{% url 'comment_replies' comment.id %}">{{comment.replies.count}} réponse(s)</a>
+  <button style="float:right;background-color:lightgray;border:0px solid blue;">
+  <a style="text-decoration:none;color:darkblue;" href="{% url 'comment-replies' comment.comment_token %}">{{comment.replies.count}} réponse(s)</a>
           </button>
             <br>
+
+        {% if user.id == article.author.id %}
+        <br>
+          <a style="color:darkblue;font-weight:bold" href="{% url 'delete-comment' comment.id %}">Supprimer</a>
+          {% endif%}
+
         </div>
         <br>
         {% endfor %}

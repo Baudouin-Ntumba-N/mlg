@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<section>
 
+  <div class="mylogin-div">
     <span style="color:violet;">{{ auth }}</span>
 
     {% if login_msg %}
@@ -18,7 +18,7 @@
 
     {% endif %}
 
-    <center>
+
         <span style="color:violet">{{authen}}</span>
         <!-- <span style="color:green">{{msl}}</span> -->
         <h1>
@@ -52,11 +52,11 @@
                     </div>
 
                     <div>
-                        <input type='password' name='password' />
+                        <input class="form-control" type='password' name='password' />
                     </div>
 
                     <div>
-                        <center><input type="submit" style="background:rgb(70, 20, 60); color:white;width:100%;" value="Se connecter"></center>
+                        <center><button class="login-btn" type="submit" style="width:100%;">Se connecter</button></center>
                     </div>
                 </div>
             </form>
@@ -64,10 +64,8 @@
         </fieldset>
         Besoin d'un compte? <a href="{% url 'signup' %}" style="color:darkblue;font-weight:700;">Inscrivez-vous</a>
 
+</div>
 
-    </center>
 
-
-</section>
 
 {% endblock %}

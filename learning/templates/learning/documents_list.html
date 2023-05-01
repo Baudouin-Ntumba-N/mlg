@@ -13,7 +13,7 @@
         <thead style="font-weight:bold;">
             <td>Titre</td><td>Format</td><td></td>
         </thead>
-        {% for document in documents %}
+        {% for document in page %}
 
         <tr class="doc-tr">
           <td style="text-align:left;"><a href="{% url 'doc-details' document.slug %}">{{document.title}}</a></td>
@@ -22,12 +22,42 @@
 
     </table>
 
+<div class="pagination">
+
+
+        <div class="pagin-cover">
+            <center>
+                {% if page.has_previous %}
+                <div>
+                    <button><a href="{% url 'documents-list' %}?page={{ page.previous_page_number }}">Précédent</a></button>
+                </div>
+                {% endif %}
+
+                {% if page.has_next %}
+                <div>
+                    <button><a href="{% url 'documents-list' %}?page={{ page.next_page_number }}">Suivant</a></button>
+                </div>
+
+                {% endif %}
+
+
+
+
+
+
+            </center>
+        </div>
+
+
+    </div>
 
 
 {% endblock %}
 
 
 {% block aside %}
+<aside>
+
     <div>
 
         <ul>
@@ -45,5 +75,6 @@
         </ul>
 
     </div>
+    </aside>
 
 {% endblock %}

@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.contrib.auth import get_user_model, authenticate, login, logout
-from django.contrib import messages
-from django.core.mail import send_mail
+from django.contrib.auth import get_user_model
 from learning.models import Document
 from shopping.models import Order, Cart
 
@@ -47,4 +44,3 @@ def delete_cart_view(request):
     cart.delete()
 
   return redirect('documents-list')
- 

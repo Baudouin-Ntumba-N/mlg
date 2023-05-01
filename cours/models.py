@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib import admin
 from django.template.defaultfilters import slugify
 from articles.models import Categorie
+from ckeditor_uploader.fields import RichTextUploadingField
+
 # Create your models here.
 
 class EnglishLesson(models.Model):
   title = models.CharField(max_length=100, null=False)
   slug = models.SlugField(max_length=255, unique=True, blank=True)
-  content = models.TextField(blank=True)
+  content = RichTextUploadingField(blank=True)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   def __str__(self):
@@ -26,7 +28,7 @@ class EnglishLesson(models.Model):
 class MathLesson(models.Model):
   title = models.CharField(max_length=100, null=False)
   slug = models.SlugField(max_length=255, unique=True, blank=True)
-  content = models.TextField(blank=True)
+  content = RichTextUploadingField(blank=True)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
 
@@ -40,10 +42,28 @@ class MathLesson(models.Model):
     else:
       super().save(*args, **kwargs)
 
+class CsLesson(models.Model):
+  title = models.CharField(max_length=100, null=False)
+  slug = models.SlugField(max_length=255, unique=True, blank=True)
+  content = RichTextUploadingField(blank=True)
+  created_on = models.DateTimeField(auto_now_add=True)
+  updated_on = models.DateTimeField(auto_now=True)
+
+  def __str__(self):
+    return self.title
+
+  def save(self, *args, **kwargs):
+    if not self.slug:
+      self.slug = slugify(self.title)
+      super().save(*args, **kwargs)
+    else:
+      super().save(*args, **kwargs)
+
+
 class GeoscienceLesson(models.Model):
   title = models.CharField(max_length=100, null=False)
   slug = models.SlugField(max_length=255, unique=True, blank=True)
-  content = models.TextField(blank=True)
+  content = RichTextUploadingField(blank=True)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   def __str__(self):

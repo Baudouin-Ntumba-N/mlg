@@ -11,7 +11,7 @@ class HomeCoverImage(models.Model):
   image = models.ImageField(upload_to = 'cover_images', default='cover_images/home.jpg', null = True)
 
 class Inscrit(AbstractUser):
-  photo = models.ImageField(upload_to = 'photos', default = 'photos/default.jpg', null = True)
+  photo = models.ImageField(upload_to = 'photos', default='photos/default.jpg', null = True)
 
   pass
 

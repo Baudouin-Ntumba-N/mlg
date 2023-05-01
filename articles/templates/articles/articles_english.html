@@ -1,0 +1,67 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Articles d'anglais {% endblock %}
+
+{% block content %}
+
+
+
+
+    <h1> Articles </h1>
+
+    {% if page %}
+    <div class="nosarticles">
+
+        {% for chaquearticle in page %}
+
+        {% autoescape off %}
+
+        <div class="article">
+            <div>
+                <img src="{{chaquearticle.photo.url }}" alt="photo" />
+            </div>
+
+            <span class="categorie">{{chaquearticle.categorie}}</span><br>
+
+            <a href="{% url 'article-details' chaquearticle.slug %}"><b>{{chaquearticle.title}}</b><br> {{ chaquearticle.content|truncatewords:15 }}</a>
+        </div>
+        {% endautoescape %}
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    <div class="pagination">
+
+
+        <div class="pagin-cover">
+            <center>
+                {% if page.has_previous %}
+                <div>
+                    <button><a href="{% url 'articles' %}?page={{ page.previous_page_number }}">Précédent</a></button>
+                </div>
+                {% endif %}
+
+                {% if page.has_next %}
+                <div>
+                    <button><a href="{% url 'articles' %}?page={{ page.next_page_number }}">Suivant</a></button>
+                </div>
+
+                {% endif %}
+
+
+
+
+
+
+            </center>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}
+
+{% block aside %}{% endblock %}

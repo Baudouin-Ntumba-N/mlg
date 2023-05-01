@@ -4,23 +4,19 @@
 
 {% block content %}
 
-
 <div class="mlg-home">
 
   <div>
     <!-- <img src="media/images/english-maths.png" /> -->
    {% if home_cover_image %}
-    <img src="{{home_cover_image.image.url}}" />
+    <img src="{{ home_cover_image.image.url }}" />
    {% endif %}
   </div>
 
-  <div class="intro-mlg">
-    <span>Apprenez les <b>mathématiques</b> et l'<b>anglais</b>, et réussissez votre carrière de chercheur scientifique en brisant les frontières linguistiques.</span>
-  </div>
 
 </div>
 
-<br><br>
+<br/><br/>
 
 <p style="float:left;font-weight:bold;margin-left:10px;">
   Découvrez <a href="{% url 'cours' %}">nos cours</a> et <a href="{% url 'articles'%}">nos articles</a> ...
@@ -28,49 +24,43 @@
 <br><br>
 
 {% if articles %}
-
+<br>
 <div class="nosarticles">
 
-  {% for article in articles %}
-  {% autoescape off%}
+
+            {% for article in articles %}
+
+            <div class="article">
+
+                {% autoescape off %}
+                <div>
+                    <img src="/media/{{article.photo}}" alt="photo" />
+                </div>
+               <br> <span class="categorie">{{ article.categorie }} </span> <br>
+                <a href="{% url 'article-details' article.slug %}">
+                    <b><span class="title">{{article.title}}</span></b></a>
 
 
-  <div class="homearticle">
+                <a href="{% url 'article-details' article.slug %}">{{article.content|truncatewords:15}}</a>
+             {% endautoescape %}
+
+            </div>
+
+            {% endfor %}
+        </div>
+  {% endif %}
 
 
-    <div>
 
-      <a href="{% url 'article-details' article.slug %}">
-
-
-
-        <img src="{{ article.photo.url }}" alt="photo" />
-
-      </a>
-    </div>
-
-    <span class="categorie">{{ article.categorie}}</span>
-    <br>
-    <span style="font-weight:500;font-size:20px;"> <a href="{% url 'article-details' article.slug %}">{{article.title}}</a></span>
-    <br>
-    <a href="{% url 'article-details' article.slug %}">{{article.content|truncatewords:15}}</a>
-    <br>
-
-  </div>
-
-
-  {% endautoescape %}
-  {% endfor %}
-  <br>
-</div>
 <a href="{% url 'articles' %}">Voir plus d'articles</a><br>
 
-{% endif %}
 
 {% endblock %}
 
-{% block aside %}
 
+
+{% block aside %}
+<aside>
 <div class="aside-main-divs">
 
   <div class="aside-header-div">
@@ -82,6 +72,10 @@
     <li><b><a href="{% url 'english-lessons' %}">Anglais</a></b></li>
 
     <li><b><a href="{% url 'maths-lessons' %}">Maths</a></b></li>
+
+    <li><b><a href="{% url 'cs-lessons' %}"> CS (Programmation) </a></b></li>
+
+    <li><b><a href="{% url 'geoscience-lessons' %}"> Géosciences </a></b></li>
 
     <br>
   </ul>
@@ -127,5 +121,6 @@
 {{ user_articles }}
 {% endif %}
 
+</aside>
 
 {% endblock %}

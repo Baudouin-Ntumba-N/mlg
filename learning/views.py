@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib import messages
 from .forms import*
@@ -6,6 +7,7 @@ from .models import Document, HomeCoverImage
 from articles.models import Article
 from shopping.models import Cart
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 import os
 import smtplib
 from django.conf import settings
@@ -23,24 +25,28 @@ def index_view(request):
     myarticles = Article.objects.filter(published = True)
     articles = myarticles.order_by('-pub_date')[: 2]
     documents = Document.objects.all()
+    documents = documents.order_by('-id')[:2]
+
     context = {'home_cover_image':home_cover_image, 'articles':articles, 'documents':documents}
     return render(request, 'learning/index.html', context)
 
 
 def signup_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        try:
-          user = User.objects.create_user(username = username, first_name = first_name, last_name = last_name, email = email, password = password)
-          login(request, user)
-          return render(request, 'learning/welcome.html', {"login_welcome_msg":f"{user.first_name}, Bienvenue sur MLG"})
-        except:
-          return render(request, 'learning/signup.html', {"signupError":"Echec! Un autre compte possède déjà ce nom d'utilisateur!"})
-
+        form = InscritForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            try:
+                user = User.objects.create_user(username = username, first_name = first_name, last_name = last_name, email = email, password = password)
+                login(request, user)
+                return render(request, 'learning/welcome.html', {"login_welcome_msg":f"{user.first_name}, Bienvenue sur MLG"})
+            except:
+                return render(request, 'learning/signup.html', {"signupError":"Echec! Un autre compte possède déjà ce nom d'utilisateur!"})
+        return redirect('signup')
     return render(request, 'learning/signup.html')
 
 
@@ -51,8 +57,7 @@ def login_view(request):
         user = authenticate(username = username, password = password)
         if user:
             login(request, user)
-            context = {'login_msg':'Vous êtes connecté(e)...'}
-            return render(request, 'learning/welcome.html', context)
+            return redirect("welcome")
         else:
             context = {"login_failure_msg":"Nom d'utilisateur ou mot de passe incorrects!"}
             return render(request, 'learning/login.html', context)
@@ -67,26 +72,51 @@ def logout_view(request):
 def contact_view(request):
   f = ContactForm(request.POST)
   if f.is_valid():
+
+
     subject = f.cleaned_data['subject']
     message = f.cleaned_data['message']
     sender = f.cleaned_data['sender']
     cc_myself = f.cleaned_data['cc_myself']
     #receiver = 'bdnntumba@gmail.com'
 
-    #recipients = [receiver]
+    recipients = [sender]
     fail_silently = False
 
     if cc_myself:
-      recipients.append(sender)
+      recipients.append(settings.EMAIL_HOST_USER)
 
 
 
-    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-    server.login("bntumbanyembwe@gmail.com", settings.EMAIL_HOST_PASSWORD)
-    server.sendmail(subject, settings.EMAIL_HOST_USER, sender,  message, fail_silently)
-    server.quit()
+    #server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    #server.login("bdnntumba@gmail.com", settings.EMAIL_HOST_PASSWORD)
+    #server.sendmail(subject, settings.EMAIL_HOST_USER, sender,  message, fail_silently)
+    #server.quit()
 
-    #send_mail(subject, message, sender, recipients, fail_silently)
+
+
+    #
+
+    #subject = f.cleaned_data['subject']
+    #message = f.cleaned_data['message']
+    #sender = f.cleaned_data['sender']
+    #cc_myself = f.cleaned_data['cc_myself']
+    #receiver = 'bdnntumba@gmail.com'
+
+    #recipients = [receiver]
+    #fail_silently = False
+
+    #if cc_myself:
+      #recipients.append(sender)
+
+
+
+    #server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    #server.login("bdnntumba@gmail.com", settings.EMAIL_HOST_PASSWORD)
+    #server.sendmail(subject, settings.EMAIL_HOST_USER, sender,  message, fail_silently)
+    #server.quit()
+
+    send_mail(subject, message, settings.EMAIL_HOST_USER , recipients, fail_silently)
 
     form = ContactForm()
     return render(request, 'learning/contact.html', {'msg_sent':'Message envoyé!', 'form':form})
@@ -96,7 +126,12 @@ def contact_view(request):
 
 
 def welcome_view(request):
-	return render(request, 'learning/welcome.html', )
+    if not request.user.is_authenticated:
+        return redirect("login")
+    articles = Article.objects.all()
+    articles = articles.order_by('-id')
+    myarticles = articles[0:4]
+    return render(request, 'learning/welcome.html', {"articles": myarticles})
 
 
 def about_view(request):
@@ -166,7 +201,10 @@ def settings_view(request):
 #liste des documents
 def documents_list_view(request):
   documents = Document.objects.all()
-  return render(request, 'learning/documents_list.html', {'documents':documents})
+  page = Paginator(documents, 10)
+  page_number = request.GET.get('page')
+  this_page = page.get_page(page_number)
+  return render(request, 'learning/documents_list.html', {'page':this_page})
 
 
 def doc_details_view(request, slug):

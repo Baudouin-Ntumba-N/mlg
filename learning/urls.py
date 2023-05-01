@@ -1,6 +1,5 @@
 
 from learning import views
-from django.contrib import admin
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 

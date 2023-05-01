@@ -6,6 +6,8 @@
         font-family: Garamond, Lucida, Arial, sans-serif;
 
     }
+
+
     body a {
 
         color: black;
@@ -258,7 +260,7 @@
         padding-left: 10px;
         padding-right: 10px;
         padding-bottom: 10px;
-
+        background-color:lightgray;
     }
 
   aside a{
@@ -266,10 +268,10 @@
   }
 
   .aside-main-divs{
-    background : rgb(220, 220, 230);
+    background:white;
   }
    .aside-header-div{
-    background-color:rgb(70, 20, 60);
+    background-color:green;
     text-align:left;
     padding-left:10px;
     color:white;
@@ -296,7 +298,6 @@
     div.mlg-home {
         color: white;
         width: 100%;
-        font-weight: 500;
 
     }
     .intro-mlg {
@@ -318,7 +319,7 @@
     div.mlg-home a {
 
         color: white;
-        font-weight: 600;
+        font-weight: bold;
     }
 
     .top-article img {
@@ -828,8 +829,15 @@ width:97%;
         border: 1px solid black;
     }
 
+    .mylogin-div{
+
+       margin-left : 300px;
+       background: green;
+
+     }
+
     .login-btn {
-        background: rgb(70, 20, 60);
+        backgroundh: rgb(70, 20, 60);
         float: right;
         height: 35px;
         border-radius: 10px;
@@ -853,6 +861,7 @@ width:97%;
         /*border:1px solid lightgray;*/
         width: 70%;
         min-height: 850px;
+        margin-top:20px;
     }
 
     section.home-section {
