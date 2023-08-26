@@ -1,0 +1,10 @@
+{% autoescape off %}
+
+ Bonjour {{ user.first_name }},
+ Veuillez cliquer sur le lien ci-dessous pour terminer l'enregistrement:
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+ Si tu penses que c'est pas toi email, ignore ce message.
+
+{% endautoescape %}
+
+

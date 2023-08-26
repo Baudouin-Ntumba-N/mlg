@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
      <link rel="stylesheet" href="{% static 'learning/main1.css' %}" type="text/css" />
      <link rel="stylesheet" href="{% static 'learning/main.css' %}" type="text/css" />
 
@@ -14,14 +15,11 @@
 
  <!--  javaScrit start -->
 
-    <script>
-        //afficher le menu
+<script>
+//afficher/ cacher le menu
+document.addEventListener('DOMContentLoaded', function () {
 
-
- document.addEventListener('DOMContentLoaded', function (){
-
-
-  if (window.innerWidth >= 900) {
+    if (window.innerWidth >= 900) {
 
         document.querySelector('#menu').style.display = 'block';
 
@@ -31,39 +29,39 @@
     }
 
 
+    let a = 0;
 
- let a = 0;
+    document.querySelector('#menu-button').onclick = function() {
 
-            document.querySelector('#menu-button').onclick = function () {
+        if (a == 1) {
+            document.querySelector('#menu').style.display = 'none';
+            document.querySelector("#menuImage").style.display = "block";
+            document.querySelector("#closeImage").style.display = "none";
+            a = 0;
+
+        } else {
+            document.querySelector('#menu').style.display = 'block';
+            document.querySelector("#menuImage").style.display = "none";
+            document.querySelector("#closeImage").style.display = "block";
+            a = 1;
+        }
+
+    }
 
 
-                document.querySelector('#menu').style.display = 'block';
+  // preview pre-uploaded profile image
+   const fileinput = document.querySelector("#id_photo");
+   const profilePhoto = document.querySelector("#profile-picture");
 
-
-
-         document.querySelector('#menu-button').style.display = 'block';
-
-              a = 1;
-
-            }
-
-       document.querySelector('#menu-button').onclick = function() {
-
-         if (a==1){
-
-          document.querySelector('#menu').style.display = 'none';
-
-             a = 0
-         }
-         else{
-
-           document.querySelector('#menu').style.display = 'block';
-        a = 1
-         }
+   fileinput.onchange = function(){
+       const [file] = fileinput.files;
+       if (file) {
+           profilePhoto.src = URL.createObjectURL(file)
 
        }
+   }
 
-        })
+})
 
     </script>
 
@@ -77,33 +75,26 @@
 
     <div id="conteneur">
         <center>
-            <header>
 
-              <div id="logo">
-	<a href = "{% url 'home' %}" id = "logo-link">
-
-	     <div style = "border-top:3px solid rgb(70, 20, 60); border-bottom:3px solid rgb(70, 20, 60);background:white;border-radius:10px;font-family:Arial;">
-
-	 <span style = "font-weight:500;color:black">ML<span style="color:rgb(70, 20, 60);color:rgb(70, 20, 60);">G</span> </span>
-
-</div>
-</a>
-<a href="{% url 'home' %}">
-  <span  class="mlg-meaning">Modern Learning Group</span></a>
-
-              </div>
-
-              <nav>
-
-
-
-<button id="menu-button"><hr><hr><hr></button>
-
-            </nav>
-
-{% include '_menu.html' %}
-
+      <header class="row">
+                  <div class="col-4" id="logo">
+                    <a href="{% url 'home' %}" id="logo-link">
+                        <div style="background-color:white;border:3px solid rgb(70, 20, 60);border-left:0px solid blue; border-right:0px solid blue;border-radius:10px 10px 10px 10px;">
+                        	<span style="font-size:25px; font-weight:500;color:black">ML<span style="color:rgb(70, 20, 60);color:rgb(70, 20, 60);font-size:25px;">G</span> </span>
+                        </div>
+                    </a>
+                    <a href="{% url 'home' %}">
+                        <span class="mlg-meaning">Modern Learning Ground</span></a>
+                </div>
+                <nav class="col-8">
+                    <button id="menu-button">
+                        <img id="menuImage" height="40" src="{% static 'learning/icons/svg/menu_FILL0.svg' %}" />
+                        <img id="closeImage" height="40" src="{% static 'learning/icons/svg/close_FILL0.svg' %}" />
+                    </button>
+                </nav>
+                {% include '_menu.html' %}
             </header>
+
 
 <div class="search">
 

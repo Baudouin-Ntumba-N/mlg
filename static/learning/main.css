@@ -1,3 +1,8 @@
+/*  */
+
+
+/*  */
+
 @media{
     body {
 
@@ -46,6 +51,9 @@
 
     }
 
+    #closeImage {
+        display:none;
+    }
     .search {
         width: 100%;
         height: 50px;
@@ -73,11 +81,18 @@
         margin-top: 5px;
         padding-left: 10px;
         display: inline-block;
-
+        height:40px;
         float: left;
         z-index: 9999999;
 
     }
+
+
+    #logo div{
+        height:30px;
+
+    }
+
     #logo-link{
         font-size:25px;
     }
@@ -102,11 +117,7 @@
     }
 
 
-    #label-menu {
-        position: absolute;
-        top: 10px;
-        right: 30px;
-        }
+
     #menu {
         display: none;
         width: 100%;
@@ -240,6 +251,12 @@
         margin-bottom: 10px;
         width: 97%;
         border: 1px solid lightgray;
+    }
+
+    .login-form .hide-show {
+     position:relative;
+     margin-top:8px;
+
     }
     .login-form div {
         align-items: center;
@@ -381,14 +398,11 @@
 
     }
 
-
     .article div {
         max-height: 300px;
         overflow: hidden;
         margin-bottom: 5px;
     }
-
-
 
     .homearticle {
         max-height: 300px;
@@ -586,18 +600,23 @@
         border-radius: 10px;
         /* box-shadow:1px 0px 20px lightgray; */
 
-
     }
     .signup-form-div {
         align-items: center;
+
     }
+
 
     .signup-form-div div input {
         width: 97%;
         margin-bottom: 10px;
         border-radius: 5px;
+        border-top:2px solid lightgray;
+        border-left:2px solid lightgray;
+        border-right:2px solid lightgray;
+        border-bottom:2px solid lightgray;
         height: 20px;
-        border-bottom: 2px solid lightgray;
+
     }
 
 
@@ -621,6 +640,44 @@
         border: 1px solid lightgray;
     }
 
+    .file-input input[type="file"] {
+        position: absolute;
+        opacity:0;
+        top:-1000;
+        width:30%;
+        z-index: -1;
+        }
+
+    .file-input {
+        cursor: pointer;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        margin-top:5px;
+        padding-top:10px;
+        width:55%;
+        text-align:center;
+        margin-left: 5px;
+        background: #dddddd;
+        height:30px;
+
+        }
+
+    .file-input:hover {
+        background: #5cbd95;
+      }
+    .file-input:active {
+         background: #9fa1a0;
+     }
+    .file-input:invalid + span {
+         color: #000000;
+    }
+    .file-input:valid + span {
+         color: #ffffff;
+
+}
+
+
+
     .modify-form {
         width: 80%;
         height: 400px;
@@ -628,15 +685,22 @@
         border-radius:10px;
     }
 
+    .modify-form button{
+        float:left;
+        margin-top:10px;
 
+    }
     .modify-form-div div {
         text-align: left;
-
-
+    }
+    .modify-form-div .photo{
+        display:flex;
+        width:100%;
     }
     .modify-form-div div img {
 
         border-radius: 30px;
+        margin-right:10px;
 
     }
 
@@ -661,14 +725,15 @@
         position: relative;
         left: 30px;
     }
-
 }
 
 
 
-@media screen and (min-width: 900px) {
 
-    body {
+@media screen and (min-width: 900px) and (max-width: 1020px) {
+
+
+     body {
 
         /* background: url('../learning/images/mlg-toile1.JPG'); */
 
@@ -696,12 +761,14 @@
     }
     #logo {
         margin-top: 12px;
+        margin-bottom: 12px;
+        padding-bottom:5px;
         padding-left: 20px;
         display: inline-block;
         font-size: 30px;
         float: left;
         margin-right: 50px;
-
+        height: 200px;
 
     }
 
@@ -712,8 +779,10 @@
 
     #logo div{
         padding-top:2px;
-        height:35px;
+        height:33px;
         margin-bottom:1px;
+        justify:center;
+        align-items:center;
     }
 
     .mlg-meaning {
@@ -722,7 +791,7 @@
         font-size: 12px;
         position: absolute;
         top: 12px;
-        left: 85px;
+        left: 80px;
         width: 30px;
         font-weight: bold;
 
@@ -733,32 +802,30 @@
         text-decoration: none;
     }
 
-    #label-menu {
-        position: absolute;
-        top: 10px;
-        right: 40px;
-    }
-
     #menu-button {
         position: absolute;
         top: 13px;
     }
 
+
     #menu{
        position:absolute;
-       top:9px;
-       right:10px;
-       width:80%;
+       top:5px;
+       left:165px;
+       width:95%;
+       margin-right:45px;
        border-top: 0px solid lightgray;
     }
 
     #menu div{
         display:inline-block;
-        width:50px;
+        width:6%;
+        font-size:12px;
         margin-right:1px;
     }
+
     #menu .signup-div{
-        margin-left:45px;
+        margin-left:20px;
         font-weight:bold;
     }
 
@@ -870,9 +937,11 @@
         width: 60%;
         margin: 20px;
     }
+
   .comment-div-textarea textarea{
        width:50%;
    }
+
     .replyform textarea {
         width: 98%;
 
@@ -884,11 +953,10 @@
     }
     nav {
         display: inline-block;
-        width: 60%;
+        width: 70%;
         font-family: Arial;
         padding-bottom: 5px;
     }
-
 
     .comment-prenom {
         position: relative;
@@ -924,6 +992,7 @@
     header span {
         font-size: 14px;
     }
+
     nav a {
         color: white;
         font-weight: bold;
@@ -940,7 +1009,6 @@
         min-height: 850px;
         width:70%;
     }
-
 
 
     aside {
@@ -961,7 +1029,7 @@
         width: 97%;
         margin-bottom: 10px;
         border-radius: 5px;
-        border: 1px solid lightgray;
+
     }
 
     .login-form div {
@@ -977,9 +1045,368 @@
         padding-left: 2px;
     }
 
+
     .signup-form {
         width: 275px;
-        height: 370px;
+        height: 380px;
+    }
+
+    .modify-form {
+        width: 45%;
+        height: 420px;
+        border: 1px solid lightgray;
+    }
+
+    .modify-form-div div input {
+        width: 98%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+    }
+
+    .modify-form-div div {
+        text-align: left;
+    }
+    footer {
+
+        height: 500px;
+
+    }
+
+
+    h2 a {
+
+        font-size: 20px;
+        color: black;
+
+
+    }
+
+    .simple-comment {
+        width: 40%;
+    }
+
+
+}
+
+
+
+
+@media screen and (min-width: 1020px) {
+
+    body {
+
+        /* background: url('../learning/images/mlg-toile1.JPG'); */
+
+    }
+
+    #conteneur {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        background: white;
+    }
+
+    header {
+        text-align: center;
+        /*background: rgb(240, 240, 245);*/
+        width: 100%;
+        height: 64px;
+
+        vertical-align: center;
+    }
+    .search {
+        padding-top: 70px;
+        border-bottom: 1px solid lightgray;
+    }
+    #logo {
+        margin-top: 12px;
+        padding-left: 20px;
+        display: inline-block;
+        font-size: 30px;
+        float: left;
+        margin-right: 50px;
+
+
+    }
+
+    #logo-link div span{
+        font-size:28px;
+
+    }
+
+    #logo div{
+        padding-top:2px;
+        height:33px;
+        margin-bottom:4px;
+        justify:center;
+        align-items:center;
+    }
+
+    .mlg-meaning {
+
+        display: block;
+        font-size: 12px;
+        position: absolute;
+        top: 12px;
+        left: 80px;
+        width: 30px;
+        font-weight: bold;
+
+
+
+    }
+    #logo a {
+        text-decoration: none;
+    }
+
+    #menu-button {
+        position: absolute;
+        top: 13px;
+    }
+
+    #menu{
+       position:absolute;
+       top:5px;
+       left:165px;
+       width:90%;
+       margin-right:45px;
+       border-top: 0px solid lightgray;
+    }
+
+    #menu div{
+        display:inline-block;
+        width:7%;
+        margin-right:1px;
+    }
+
+
+    #menu .signup-div{
+        margin-left:20px;
+        font-weight:bold;
+    }
+
+    #menu .login-div{
+        margin-left:1px;
+
+    }
+    #menu .logout-div{
+        margin-left:1px;
+
+    }
+
+    .document-list tr:nth-child(even) {
+        background-color: rgb(240, 240, 245);
+    }
+    .nosarticles {
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 50%);
+        /*grid-template-rows:repeat(3, 50%); */
+        grid-gap: 10px;
+
+        align-content: center;
+        border-radius: 3px;
+        /* border:1px solid lightgray;*/
+
+
+    }
+
+    .homearticles{
+       display:flex;
+    }
+
+   .homearticles .homearticle{
+    display:inline-block;
+    width: 40%;
+    height: 70%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+    div.mlg-home {
+
+
+        font-size: 40px;
+        align-content: center;
+        border-radius: 3px;
+        /* border:1px solid lightgray;*/
+
+
+    }
+
+
+
+
+    /*div.mlg-home img {}*/
+    /* contain presentation image*/
+    div.mlg-home div {
+        max-height: 650px;
+        overflow: hidden;
+    }
+
+    .article {
+
+        /*margin-bottom:10px;*/
+        background-color: rgb(240, 240, 240);
+        padding: 0px;
+        margin: 5px;
+        padding:10px;
+
+    }
+    .article div {
+        max-height: 300px;
+    }
+
+    .article img {
+        width: 100%;
+        height: 70%;
+    }
+
+    .article .content {
+        height:50px;
+    }
+    .article a {
+        text-decoration: none;
+    }
+    .article a:hover {
+        text-decoration: underline;
+    }
+    .article .categorie {
+        font-size: 12px;
+        font-weight: bold;
+        font-family: Arial;
+        text-transform: uppercase;
+
+    }
+
+   .edition{
+      margin-left: 20%;
+   }
+
+    .details {
+        background-color: white;
+        padding: 10px;
+    }
+
+    .details img {
+        width: 60%;
+        margin: 20px;
+    }
+
+  .comment-div-textarea textarea{
+       width:50%;
+   }
+
+    .replyform textarea {
+        width: 98%;
+
+    }
+    .replyform input {
+        float: right;
+        position: relative;
+        right: 200px;
+    }
+    nav {
+        display: inline-block;
+        width: 70%;
+        font-family: Arial;
+        padding-bottom: 5px;
+    }
+
+    .comment-prenom {
+        position: relative;
+        bottom: 30px;
+    }
+
+    .comment-prenom2 {
+        position: relative;
+        bottom: 10px;
+
+    }
+
+    .contact-form-fieldset {
+
+        width: 60%;
+        padding: 20px;
+    }
+    .contact-form {
+        text-align: left;
+    }
+    .contact-form input, textarea {
+        width: 97%;
+        border-radius: 3px;
+        border: 1px solid gray;
+    }
+    .send-btn {
+        background: rgb(70, 20, 60);
+        color: white;
+        border: 1px solid black;
+    }
+
+
+    header span {
+        font-size: 14px;
+    }
+
+    nav a {
+        color: white;
+        font-weight: bold;
+        font-size: 10px;
+        text-decoration: none;
+    }
+
+
+
+
+    section {
+        display: inline-block;
+        /*border:1px solid lightgray;*/
+        min-height: 850px;
+        width:70%;
+    }
+
+
+    aside {
+
+        display: inline-block;
+        vertical-align: top;
+        /*border-left: 1px solid lightgray;*/
+        /*border-right:1px solid lightgray;*/
+        text-align: left;
+       /* border: 1px solid lightgray;*/
+         width:25%;
+    }
+
+    .signup-form-div div {
+        margin-bottom: 5px;
+    }
+    .signup-form-div div input {
+        width: 97%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+
+    }
+
+    .login-form div {
+        margin-bottom: 10px;
+    }
+    .login-form div input {
+        width: 95%;
+    }
+
+    .login-form {
+        align-items: center;
+        width: 100%;
+        padding-left: 2px;
+    }
+
+
+    .signup-form {
+        width: 275px;
+        height: 380px;
     }
 
     .modify-form {
@@ -1019,4 +1446,3 @@
 }
 
 
-}

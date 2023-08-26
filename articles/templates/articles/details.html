@@ -12,7 +12,7 @@
 
     <div style="background:white;">
 
-        <span style="color:gray;font-size:13px;">Mis à jour le {{ article.updated_on}} UTC</span><br>
+        <span style="color:gray;font-size:13px;">Mis à jour le <i>{{ article.updated_on|date:"d M Y" }} à {{ article.updated_on|time:"H:i" }} UTC </i> </span><br>
 
       <h1>{{ article.title }}</h1>
 
@@ -28,7 +28,7 @@
         <p>
             {{ article.content }}
         </p>
-        <span style="color:gray;font-size:13px;"> créé le {{ article.pub_date}} UTC</span><br><br>
+        <span style="color:gray;font-size:13px;"> créé le <i>{{ article.pub_date|date:"d M Y" }} à {{ article.pub_date|time:"H:i" }} UTC </i> </span><br><br>
 
     </div>
     <br>

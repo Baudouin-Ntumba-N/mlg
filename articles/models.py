@@ -26,6 +26,8 @@ class Article(models.Model):
 
   content = RichTextUploadingField(blank=True, null=True)
 
+  topic = models.CharField(max_length=300, null=True, blank=True)
+
   photo = models.ImageField(null=True, upload_to='images')
 
   pub_date = models.DateTimeField(auto_now_add=True, null=True)

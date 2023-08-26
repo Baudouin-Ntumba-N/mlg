@@ -21,7 +21,7 @@
     }
 
     // Affichage puis disparition de message de modifications réussies
-    //---------------------------------------------------------------
+    //----------------------------------------------------------------
 
     let counter1 = 0;
 
@@ -86,7 +86,7 @@
      {% endif %}
     <div class="welcome">
 
-        <span style="font-weight:400">Commentez nos articles sans problèmes</span>
+        <span style="font-weight:400"> Continuer à consulter:</span>
 
         <h3> Voir <a href="{% url 'articles' %}">nos Articles</a> / <a href="{% url 'cours' %}">Nos Cours </a> / <a href="{% url 'documents-list' %}">Documents</a></h3>
 
@@ -155,7 +155,7 @@
             <b><span class="title">{{chaquearticle.title}}</span></b>
             <br>
             <div class="content">{% autoescape off %}
-            {{ chaquearticle.content|truncatewords:15 }}
+            {{ chaquearticle.topic|truncatewords:15}}
             {% endautoescape %} </div>
         </div></a>
 

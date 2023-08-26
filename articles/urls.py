@@ -19,4 +19,17 @@ urlpatterns = [
     path('articles/comment/replies/<str:comment_token>', views.comment_replies_view, name='comment-replies'),
     path('articles/comment/delete/<int:comment_id>', views.delete_comment_view, name='delete-comment'),
     path('articles/comment/reply/delete/<int:reply_id>', views.delete_reply_view, name='delete-reply'),
+
+
+    #api urls
+    path('articles-api/', views.article_list, name='articles-api'),
+    path('article-api/<str:slug>/', views.article_detail,
+         name='api-article-detail'),
+    path('comment-api/',
+         views.insert_comment, name='comment-api'),
+    path('comment-replies-api/<str:parent_token>',
+         views.replies_api, name='comment-api'),
+    path('article-update-api/<str:slug>',
+         views.article_update_detail, name='api-article-detail'),
+
 ]

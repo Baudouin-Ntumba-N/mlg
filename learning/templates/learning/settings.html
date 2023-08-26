@@ -5,10 +5,11 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-
+<div>
 {% if msm %}
 <span>{{msm}}</span>
 {% endif %}
+
 
 <h2>Modifiez votre compte </h2>
 
@@ -21,13 +22,13 @@
 
 
       <div>
-        Nom d'utilisateur:
+        Nom d'utilisateur: {{ user.username }}
       </div>
 
       <div>
-        <input name="username" type="text" value="{{user.username}}" />
+        <input name="username" type="hidden" value="{{ user.username }}" />
       </div>
- <br>
+<br>
 
       <div>
         Prénom:
@@ -45,6 +46,7 @@
       <div>
         <input name="last_name" type="text" value="{{user.last_name}}" />
       </div>
+
  <br>
 
       <div>
@@ -57,14 +59,13 @@
 
  <br>
 
-      <div>
-        changer photo de profil:
-      </div>
+      <div class="photo">
+        <img id="profile-picture" alt="photo" src="{{ user.photo.url }}" width="50" height="50" />
 
-      <div>
-        <img src="{{ user.photo.url }}" width="50"
-        height="50" />
-        {{form.photo}}
+        <label class="file-input">
+         <input type="file" name="photo" accept="image/*" id="id_photo" />
+          Choisir une image
+        </label>
 
       </div>
 
@@ -81,6 +82,8 @@
 
 
 <a href="{% url 'password-change' %}">Changer le mot de passe</a>
+
+</div>
 {% endif %}
 
 <br>
@@ -93,3 +96,5 @@
 
 
 {% endblock %}
+
+

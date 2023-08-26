@@ -6,7 +6,6 @@ from articles.models import Article
 
 
 def cours_view(request):
-
   return render(request, 'cours/list.html')
 
 def geosciencelesson_view(request):

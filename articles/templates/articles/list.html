@@ -28,7 +28,9 @@
 
             <span class="categorie">{{chaquearticle.categorie}}</span><br>
 
-            <a href="{% url 'article-details' chaquearticle.slug %}"><b> <span class="title">{{chaquearticle.title}}</span></b><br> {{ chaquearticle.content|truncatewords:15 }}</a>
+            <a href="{% url 'article-details' chaquearticle.slug %}"><b> <span class="title">{{chaquearticle.title}}</span></b>
+            <br> {{ chaquearticle.topic|truncatewords:15 }}</a>
+
         </div>
         {% endautoescape %}
         {% endfor %}

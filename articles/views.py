@@ -5,10 +5,23 @@ from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 
 
+
+from django.http import HttpResponse, JsonResponse
+from .serializers import ArticleSerializer, CommentSerializer, CommentSendSerializer
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+
+
+
+
+
 User = get_user_model()
 
 def articles_list_view(request):
-    articles = Article.objects.all()
+    articles = Article.objects.filter(published=True)
     articles = articles.order_by('-pub_date')
 
     page = Paginator(articles, 4)
@@ -30,8 +43,10 @@ def article_details_view(request, slug):
     return render(request, 'articles/details.html', {'article':article, 'comments':comments, 'comments_number':comments_number})
 
 def edit_article_view(request):
+  if not request.user.is_authenticated:
+      if not request.user.is_superuser:
+          return redirect("login")
   form = ArticleForm()
-
   if request.method == "POST":
     if request.user.is_authenticated:
         f = ArticleForm(request.POST, request.FILES)
@@ -49,6 +64,10 @@ def edit_article_view(request):
 
 
 def update_article_view(request, slug):
+    if not request.user.is_authenticated:
+        if not request.user.is_superuser:
+            return redirect("articles")
+
     try:
         article = Article.objects.get(slug=slug)
     except:
@@ -58,7 +77,7 @@ def update_article_view(request, slug):
     if request.method=='POST':
         if not request.user.is_authenticated:
             return redirect('login')
-        f = UpdateArticleForm(request.POST, request.FILES, instance=article)
+        f = UpdateArticleForm(data=request.POST, files=request.FILES, instance=article)
         if f.is_valid():
             f.save()
             return redirect('articles')
@@ -202,6 +221,116 @@ def delete_reply_view(request, reply_id):
     reply = Comment.objects.get(pk=reply_id)
     reply.delete()
     return redirect(f"/articles/comment/replies/{reply.comment_token}")
+
+
+
+
+
+
+# OUR API SERVICE
+@api_view(["GET", "POST"])
+def article_list(request):
+
+    if request.method == 'GET':
+        articles = Article.objects.filter(published=True).order_by('-pub_date')
+        serializer = ArticleSerializer(articles, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = ArticleSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def article_detail(request, slug):
+    try:
+        article = Article.objects.get(slug=slug)
+    except:
+        article.DoesNotExist()
+
+    if request.method == "GET":
+        article_serializer = ArticleSerializer(article)
+
+        comments = (Comment.objects.filter(
+            commented_article=article)).order_by('-post_date')
+        comments_serializer = CommentSerializer(comments, many=True)
+
+        return Response({"article":article_serializer.data, "comments":comments_serializer.data})
+
+    elif request.method == "PUT":
+        serializer = ArticleSerializer(article, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(["GET", "POST"])
+def replies_api(request, parent_token):
+    try:
+        comment = Comment.objects.get(comment_token=parent_token)
+    except:
+        comment.DoesNotExist()
+
+    if request.method == "GET":
+        replies = (Comment.objects.filter(parent=comment)).order_by('-post_date')
+        replies_serializer = CommentSerializer(replies, many=True)
+        comment_serializer = CommentSerializer(comment)
+        return Response({"comment":comment_serializer.data, "replies":replies_serializer.data})
+
+    elif request.method == "POST":
+        serializer = CommentSendSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["POST"])
+def insert_comment(request):
+    if request.method == "POST":
+        serializer = CommentSendSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def article_update_detail(request, slug):
+    try:
+        article = Article.objects.get(slug=slug)
+    except:
+        article.DoesNotExist()
+
+    if request.method == "GET":
+        serializer = ArticleSerializer(article)
+        return Response(serializer.data)
+
+    elif request.method == "PUT":
+        serializer = ArticleSerializer(article, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == "DELETE":
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 # End
 # End

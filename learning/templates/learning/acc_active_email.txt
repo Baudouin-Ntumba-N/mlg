@@ -1,0 +1,15 @@
+{% autoescape off %}
+<html>
+    <body>
+
+Hi {{ user.username }},
+ <h2>Veuillez cliquer sur le bouton ci-dessous :</h2>
+<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}"><button style='background-color:rgb(70, 20, 60); color:white'>Confirmer</button></a>
+ <p><b>Si tu penses que c'est pas toi email, ignore ce message.</b></p>
+
+</body>
+</html>
+
+{% endautoescape %}
+
+

@@ -26,24 +26,21 @@
                   <input type='text' name='username' required />
                 </div>
 
-              <div>
+                <div>
                     Prénom:
                 </div>
-
 
                 <div>
                     <input name="first_name" type="text" required />
                 </div>
 
-<div>
+                <div>
                     Nom:
                 </div>
 
                 <div>
                     <input name="last_name" type="text" required />
                 </div>
-
-
 
                 <div>
                     Email:
@@ -53,32 +50,53 @@
                     <input type='email' name='email' required />
                 </div>
 
-               <br>
-
                 <div>
                     Mot de passe:
                 </div>
 
                 <div>
-                   <input type='password' name='password' required />
+                    <input id="id_password" type='password' name='password' required />
+                    <span style="font-weight: bold; color: rgb(70, 20, 60);">
+                        <span id="eye" style="float: right">Afficher</span>
+                    </span>
                 </div>
-
+                <br/><br/>
 
             </div>
 
-            <br>
-
             <div class="signup-buttons">
             <button type="reset" class="reset-btn"> Annuler  </button>
-
             <button type="submit" class="save-btn"> Inscription </button>
        </div>
           <br>
 
         </form>
-
-
     </fieldset>
+
+
+<!-- hide/show password -->
+<script>
+
+ document.addEventListener("DOMContentLoaded", function(){
+   const password = document.querySelector("#id_password");
+   const eye = document.querySelector("#eye");
+   eye.onclick = function(){
+       if (password.type =="password"){
+       password.type = "text";
+       eye.innerText = "Masquer"
+
+       }else{
+           password.type="password";
+           eye.innerText = "Afficher"
+       }
+   }
+
+ });
+
+</script>
+<!-- end hide/show password -->
+
+
     {% endblock %}
 
 

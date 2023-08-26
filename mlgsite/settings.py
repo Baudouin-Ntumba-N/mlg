@@ -14,6 +14,8 @@ import os
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,12 +24,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@8lj4ezl9xv#qdx&9ltys1%f0q*zi(1092b15h(a38t(71jep1'
+
+
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['bdnntumbanyembwe.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.mlglearning.com']
 
 
 # Application definition
@@ -45,6 +49,10 @@ INSTALLED_APPS = [
     'articles',
     'cours',
     'shopping',
+    'rest_framework',
+    'knox',
+    'corsheaders',
+
 
 
 ]
@@ -53,6 +61,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -97,10 +106,10 @@ DATABASES = {
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'bdnntumbanyembwe$mymlgdb',
+         'NAME':config('DATABASE_NAME'),
          'HOST': 'bdnntumbanyembwe.mysql.pythonanywhere-services.com',
          'USER': 'bdnntumbanyembwe',
-         'PASSWORD': 'bdn20190925mlg',
+         'PASSWORD':config('DATABASE_PASSWORD'),
          'PORT':'3306',
          'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
@@ -134,6 +143,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'exp://192.168.43.62:19000',
+
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -162,6 +178,8 @@ MEDIA_URL = '/media/'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 AUTH_USER_MODEL = 'learning.Inscrit'
 
 
@@ -172,12 +190,23 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 
-EMAIL_HOST_USER = 'bdnntumba@gmail.com'
+EMAIL_HOST_USER = 'mlglearningtop@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'virtmkkhyyfobash'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 
-EMAIL_USER_TLS = True
+EMAIL_USE_TLS = True
 
-EMAIL_USER_SSL = False
+EMAIL_USE_SSL = False
+
+
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': [
+    'knox.auth.TokenAuthentication',
+  ]
+
+}
+
+
+

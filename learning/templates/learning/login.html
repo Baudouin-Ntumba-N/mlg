@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
   <div class="mylogin-div">
     <span style="color:violet;">{{ auth }}</span>
 
@@ -18,7 +17,6 @@
 
     {% endif %}
 
-
         <span style="color:violet">{{authen}}</span>
         <!-- <span style="color:green">{{msl}}</span> -->
         <h1>
@@ -29,8 +27,6 @@
         <span class="failure-msg" style="color:red;font-size:14px;">{{login_failure_msg }}</span>
 
         {% endif %}
-
-
 
         <fieldset class="login-form-fieldset">
 
@@ -52,8 +48,12 @@
                     </div>
 
                     <div>
-                        <input class="form-control" type='password' name='password' />
+                        <input class="form-control" id="id_password" type='password' name='password' />
+                        <span style="font-weight: bold; color: rgb(70, 20, 60);">
+                            <span id="eye" style="float: right">Afficher</span>
+                        </span>
                     </div>
+                    <br/>
 
                     <div>
                         <center><button class="login-btn" type="submit" style="width:100%;">Se connecter</button></center>
@@ -66,6 +66,27 @@
 
 </div>
 
+<!-- hide/show password -->
+<script>
+
+ document.addEventListener("DOMContentLoaded", function(){
+   const password = document.querySelector("#id_password");
+   const eye = document.querySelector("#eye");
+   eye.onclick = function(){
+       if (password.type =="password"){
+       password.type = "text";
+       eye.innerText = "Masquer"
+
+       }else{
+           password.type="password";
+           eye.innerText = "Afficher"
+       }
+   }
+
+ });
+
+</script>
+<!-- end hide/show password -->
 
 
 {% endblock %}

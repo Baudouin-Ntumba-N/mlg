@@ -8,13 +8,13 @@ class ArticleForm(forms.ModelForm):
 
   class Meta:
     model = Article
-    fields = ["id", "title", "categorie", "author", "content", "photo", "published"]
+    fields = ["id", "title", "topic", "categorie", "author", "content", "photo", "published"]
 
 class UpdateArticleForm(forms.ModelForm):
 
   class Meta:
     model = Article
-    fields = ["id", "title", "categorie", "author", "content", "photo", "published"]
+    fields = ["id", "title", "topic", "categorie", "author", "content", "photo", "published"]
 
 
 

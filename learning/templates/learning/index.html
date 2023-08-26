@@ -34,14 +34,14 @@
 
                 {% autoescape off %}
                 <div>
-                    <img src="/media/{{article.photo}}" alt="photo" />
+                    <img src="{{article.photo.url}}" alt="photo" />
                 </div>
                <br> <span class="categorie">{{ article.categorie }} </span> <br>
                 <a href="{% url 'article-details' article.slug %}">
-                    <b><span class="title">{{article.title}}</span></b></a>
+                    <b><span class="title">{{article.title}}</span></b></a> <br>
 
 
-                <a href="{% url 'article-details' article.slug %}">{{article.content|truncatewords:15}}</a>
+                <a href="{% url 'article-details' article.slug %}">{{article.topic|truncatewords:15}}</a>
              {% endautoescape %}
 
             </div>
@@ -73,9 +73,9 @@
 
     <li><b><a href="{% url 'maths-lessons' %}">Maths</a></b></li>
 
-    <li><b><a href="{% url 'cs-lessons' %}"> CS (Programmation) </a></b></li>
+    <li><b><a href="{% url 'cs-lessons' %}"> Informatique <br/>(Programmation) </a></b></li>
 
-    <li><b><a href="{% url 'geoscience-lessons' %}"> Géosciences </a></b></li>
+    <!-- <li><b><a href="#!"> Géosciences </a></b></li> -->
 
     <br>
   </ul>
