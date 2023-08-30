@@ -3,17 +3,16 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib import admin
 from learning.templatetags.learning_tags import*
 from django.template.defaultfilters import slugify
+from ckeditor.fields import RichTextField
 
-
-
+class AboutUs(models.Model):
+    content = RichTextField(null=True)
 
 class HomeCoverImage(models.Model):
   image = models.ImageField(upload_to = 'cover_images', default='cover_images/home.jpg', null = True)
-  def __str__(self):
-      return str(self.id)
-class Inscrit(AbstractUser):
-  photo = models.ImageField(upload_to = 'photos', default='photos/default.jpg', null = True)
 
+class Inscrit(AbstractUser):
+  photo = models.ImageField(upload_to = 'photos', default = 'photos/default.jpg', null = True)
   pass
 
 class InscritAdmin(admin.ModelAdmin):
@@ -27,14 +26,6 @@ class Categorie(models.Model):
     verbose_name="Catégorie"
 
 
-
-class Contact(models.Model):
-    subject = models.CharField(max_length=200, null=True)
-    message = models.TextField(null=True, blank=True)
-    email = models.EmailField(blank=True)
-    date = models. DateTimeField(auto_now_add=True, null=True)
-    def __str__(self):
-        return self.subject+" from "+self.email+" à "+str(self.date)
 
 
 class Document(models.Model):

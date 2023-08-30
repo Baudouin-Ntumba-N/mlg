@@ -4,175 +4,69 @@
 
 {% block content %}
 
-<!-- javaScript -->
-<script>
-    // Affichage puis disparition de message de connexion
-    //--------------------------------------------------
+<div class="container">
 
-    let counter = 0;
+    <!-- javaScript -->
+    <script>
 
-    function count() {
-        counter++;
-        if (counter < 2) {
-            document.querySelector("#login-msg").style.display = "block";
-        } else {
-            document.querySelector("#login-msg").style.display = "none";
+
+        // Affichage puis disparition de message de connexion
+        //--------------------------------------------------
+
+        let counter = 0;
+
+        function count() {
+            counter++;
+            if (counter < 2) {
+                document.querySelector("#login-msg").style.display = "block";
+            } else {
+                document.querySelector("#login-msg").style.display = "none";
+            }
         }
-    }
-
-    // Affichage puis disparition de message de modifications réussies
-    //----------------------------------------------------------------
-
-    let counter1 = 0;
-
-    function count1() {
-        counter1++;
-        if (counter1 < 2) {
-            document.querySelector("#modif-success").style.display = "block";
-        } else {
-            document.querySelector("#modif-success").style.display = "none";
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        setInterval(count, 1000);
-        setInterval(count1, 2000);
-    })
 
 
-</script>
-<!-- end javaScript -->
+        document.addEventListener("DOMContentLoaded", function () {
+            setInterval(count, 1000);
+        })
 
 
+    </script>
+    <!-- end javaScript -->
 
 
-    {% if comment_failure %}
-    <strong style="color:darkred">
-        {{comment_failure}}
-    </strong>
-
-    {% endif %}
-
-    {% if comment_report %}
-
-    <strong style="color:darkgreen;">
-
-        {{comment_report}}
-
-    </strong>
-
-    {% endif %}
-
-    <div id="modif-success" style="background:darkgreen;color:white;font-size:20px;">
-        {{modif}}
-    </div>
-
-
-    <div style="height:20px;">
-      <h2>
-        {{login_welcome_msg}}
-      </h2> <br>
-
-    </div>
-    <div style="height:45px">
-    {% if articles %}
-
-    <div id="login-msg" style="height:30px;background-color:darkgreen;color:white;">
-      <h1>
-      Vous êtes connecté(e)...
-      </h1>
-    </div>
-    </div>
-     {% endif %}
+   <div style="height:20px;">
+    <h4>
+        <span id="login-msg" class="login-msg text-success">Vous êtes connecté(e)...</span>
+    </h4>
+   </div>
+   <br>
     <div class="welcome">
 
-        <span style="font-weight:400"> Continuer à consulter:</span>
+        <span class="text-primary">Vous pouvez maintenant commenter nos articles ou simplement nous laisser un commentaire</span>
 
-        <h3> Voir <a href="{% url 'articles' %}">nos Articles</a> / <a href="{% url 'cours' %}">Nos Cours </a> / <a href="{% url 'documents-list' %}">Documents</a></h3>
+
+
+        <p>
+            <b><a href="{% url 'articles' %}">Voir nos Articles</a></b> &nbsp;| &nbsp;<b><a href="{% url 'cours' %}">Nos Cours / Courses</a></b>
+        </p>
 
         <br>
 
     </div>
 
 
-    <!--  javaScrit start -->
 
-    <script>
-        //afficher la comment form
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelector('.simple-comment').style.display = 'none';
-            let a = 0;
-
-            document.querySelector('.simple-comment-btn').onclick = function () {
-
-
-                document.querySelector('.simple-comment').style.display = 'block';
-
-
-
-                document.querySelector('.simple-comment-btn').style.display = 'block';
-
-                a = 1;
-
-            }
-
-            document.querySelector('.simple-comment-btn').onclick = function() {
-
-                if (a == 1) {
-
-                    document.querySelector('.simple-comment').style.display = 'none';
-
-                    a = 0
-                } else {
-
-                    document.querySelector('.simple-comment').style.display = 'block';
-                    a = 1
-                }
-
-            }
-
-        })
-
-    </script>
     <!-- javaScript end -->
-
-
-                <div class="nosarticles">
-
-            {% if articles %}
-
-              {% for chaquearticle in articles %}
-
-
-          <div class="article">
-            <a href="{% url 'article-details' chaquearticle.slug %}">
-            <div>
-                <img src="{{chaquearticle.photo.url }}" alt="photo" />
-            </div>
-
-            <span class="categorie">{{chaquearticle.categorie}}</span><br>
-
-            <b><span class="title">{{chaquearticle.title}}</span></b>
-            <br>
-            <div class="content">{% autoescape off %}
-            {{ chaquearticle.topic|truncatewords:15}}
-            {% endautoescape %} </div>
-        </div></a>
-
-        {% endfor %}
-
-
-            {% endif %}
-
-        </div>
-
-          <a href="{% url 'articles' %}"> Voir plus d'articles </a>
+    <div>
 
 
 
+    </div>
 
 
+</div>
 
 
-{% endblock %}
+    {% endblock %}
 
+    {% block aside %} {% endblock %}

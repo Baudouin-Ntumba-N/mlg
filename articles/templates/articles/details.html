@@ -1,116 +1,120 @@
 {% extends 'base_template.html'%}
-
-{% block title %} {{ article.title }} {% endblock %}
+{% load static %}
+{% block title %} Détail sur l'article {% endblock %}
 
 {% block content %}
-
-{% if article %}
-
-  <div class="details">
-
-   {% autoescape off %}
-
-    <div style="background:white;">
-
-        <span style="color:gray;font-size:13px;">Mis à jour le <i>{{ article.updated_on|date:"d M Y" }} à {{ article.updated_on|time:"H:i" }} UTC </i> </span><br>
-
-      <h1>{{ article.title }}</h1>
-
-      <p><i> Par <b> {{ article.author.first_name }} {{ article.author.last_name }}</b> </i> </p>
-
-    {% if user.id == article.author.id %}
-
-     <b><a href="{% url 'update-article' article.slug %}"> Editer cet article </a></b> <br>
-
-     {% endif %}
-
-        <img src="{{ article.photo.url }}" alt="image" />
-        <p>
-            {{ article.content }}
-        </p>
-        <span style="color:gray;font-size:13px;"> créé le <i>{{ article.pub_date|date:"d M Y" }} à {{ article.pub_date|time:"H:i" }} UTC </i> </span><br><br>
-
-    </div>
-    <br>
-    <hr>
-
-    Laissez un commentaire
-    <!--- debut comment form -->
-    <form action="{% url 'comment' %}" method="POST">
-        {% csrf_token %}
-
-        <input name="article_slug" type="hidden" value="{{article.slug}}" />
-
-        <div class="comment-div-textarea">
-            <textarea required name="content" cols="100" rows="20"></textarea> <br>
-
-          <button type="submit">Envoyer</button> <br>
-
-        </div>
-
-
-    </form>
-    <!-- fin comment form -->
-
-    <!-- les commentaires -->
-    <div>
-        <br>
-        <b>{% if comments %}{{comments_number}}{% else %} 0 {% endif %} Commentaire(s)</b><br><br>
-
-        {% for comment in comments %}
-        <div class="comments-block">
-            {%if comment.writer.is_superuser %}
-
-          <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;" /><span class="comment-prenom">{{comment.writer.first_name}} <span style="color:white;padding:5px;font-size:12px;background-color:darkgreen;">Auteur</span></span></b>         <p>
-                {{comment.comment_content}}
-            </p>
-            <span style="color:gray;font-size:13px;">{{comment.post_date}} UTC</span><br><br>
-
-            {% else %}
-
-          <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;"/> <span class="comment-prenom">{{comment.writer.first_name}}</span></b>
-            <p>
-                {{comment.comment_content}}
-            </p>
-            <span style="color:gray;font-size:13px;">{{comment.post_date}} UTC</span><br><br>
-
+<section class="container">
+    {% if article %}
+    <div class="article-details">
+        {% autoescape off %}
+        <div>
+            {% if user.id == article.author.id %}
+            <h2>
+                <a href="{% url 'update-article' article.slug %}"> Editer cet article</a>
+            </h2>
             {% endif %}
 
-            <a href="{% url 'reply' comment.comment_token %}"> <button style="margin-left:20px; float:left;color:darkblue;background:lightgray;border:0px solid blue;"> Répondre </button></a>
+            <span class="date">Mis à jour le {{ article.updated_on|date:"D d M Y" }} à {{ article.updated_on|time:"H:i" }} GMT </span><br>
 
-
-  <button style="float:right;background-color:lightgray;border:0px solid blue;">
-  <a style="text-decoration:none;color:darkblue;" href="{% url 'comment-replies' comment.comment_token %}">{{comment.replies.count}} réponse(s)</a>
-          </button>
+            <h1>{{ article.title }}</h1><br>
+            <p class="author">
+                <a href="#!">
+                    <img class="author-image" src="{{ article.author.photo.url }}"/> par  <i><b>{{ article.author.first_name }} {{ article.author.last_name }} </b> </i>
+                </a>
+            </p>
             <br>
+            <br>
+            <img class="image" src="{{ article.photo.url }}" alt="image" />
+            <div>
+                {{ article.content }}
+            </div> <br>
 
-        {% if user.id == article.author.id %}
-        <br>
-          <a style="color:darkblue;font-weight:bold" href="{% url 'delete-comment' comment.id %}">Supprimer</a>
-          {% endif%}
+            <p class="author">
+                <a href="#!">
+                    <img class="author-image" src="{{ article.author.photo.url }}"/>  <i><b>{{ article.author.first_name }} {{ article.author.last_name }} </b> </i>
+                </a>
+            </p>
+            <br>
+            <span class="date">
+                {{ article.pub_date|date:"D d M Y" }} à {{ article.pub_date|time:"H:i" }} GMT
+            </span><br><br>
 
         </div>
         <br>
-        {% endfor %}
+        <hr>
+
+        <div class="likes-comments-icons row">
+            <div class="likes p-1 col-3">
+                <div class="likes-count">
+                    {{ article.likes.count }}
+                </div>
+                <a href="{% url 'like-article' article.slug %}">
+                    {% if not user in article.likes.all %}
+                    <img src="{% static 'learning/icons/thumb_up.svg' %}" />
+                    {% else %}
+                    <img src="{% static 'learning/icons/blue_thumb_up.png' %}" />
+                    {% endif %}
+
+                </a>
+            </div>
+            <div class="comments-icon col-8">
+                <b>{% if comments %} {{ comments_number }} {% else %}0{% endif %} Commentaire(s)</b>
+            </div>
+        </div>
+        <br><br>
+
+        Laissez un commentaire
+
+        <!--- debut comment form -->
+        <form action="{% url 'comment' %}" method="POST">
+            {% csrf_token %}
+
+            <input name="article_slug" type="hidden" value="{{article.slug}}" />
+            <div class="w-100">
+                <textarea class="form-control" name="comment" cols="25" rows="5" required ></textarea> <br>
+                <button class="btn btn-primary" type="submit">Envoyer</button> <br>
+            </div>
+        </form>
+        <div>
+            <br>
+            <b>{% if comments %} {{ comments_number }} {% else %}0{% endif %} Commentaire(s)</b><br><br>
+            {% for comment in comments %}
+            <div class="comment-div">
+                <a href="#!">
+                    <b><img class="user-image" src="{{ comment.writer.photo.url }}"/>
+                        <span class="comment-prenom">{{comment.writer.first_name}} {{ comment.writer.last_name }}
+                           {% if comment.writer.id == comment.commented_article.author.id %}
+                           <span class="badge-success">Auteur</span>
+                            {% endif %}
+                        </span>
+                    </b>
+                </a><br>
+                <div class="comment-content">
+                    <p>
+                        {{ comment.comment_content }}
+                    </p>
+                </div>
+
+                <a href="{% url 'reply' comment.token %}">
+                    <button class="reply-btn"> Répondre </button>
+                </a>
+                <button class="replies-btn">
+                    <a href="{% url 'comment-replies' comment.token %}"> {{ comment.replies.count }} réponse(s)</a>
+                </button><br>
+                <span class="date">{{ comment.post_date|date:"D d M Y" }} à {{ comment.post_date|time:"H:i" }} GMT </span><br>
+
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+        <br>
+        {% endautoescape %}
     </div>
-    <br>
+    {% endif %}
+    {% if not article %}
+    <a href="{% url 'articles' %}">Voir nos articles</a>
+    {% endif %}
 
-
-{% endautoescape %}
-
-</div>
-
-
-{% endif %}
-
-
-{% if not article %}
-
-<a href="{% url 'articles' %}">Voir nos articles</a>
-
-{% endif %}
-
-
-
+</section>
 
 {% endblock %}

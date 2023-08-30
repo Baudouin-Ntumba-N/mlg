@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import get_user_model
+from django.http import HttpResponse
+from django.contrib.auth import get_user_model, authenticate, login, logout
+from django.contrib import messages
+from django.core.mail import send_mail
 from learning.models import Document
 from shopping.models import Order, Cart
 
@@ -20,7 +23,7 @@ def add_to_cart_view(request, slug):
     cart.orders.add(order)
     cart.save()
   else:
-    order.quantity += 1
+    #order.quantity += 1
     order.save()
 
   cart = Cart.objects.get(shopper=request.user)

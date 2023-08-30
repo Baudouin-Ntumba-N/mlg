@@ -1,49 +1,34 @@
 {% extends 'base_template.html'%}
 
-{% block title %} Réponse {% endblock %}
+{% block title %} Répondre {% endblock %}
 
 {% block content %}
 
+{% if comment %}
+<section class="container">
+    <div class="container">
 
-
-    {% if comment %}<div class="details">
-
-
-        <div class="comments-block">
-            <b><img src="{{ comment.writer.photo.url}}" style="width:40px;height:40px;" /><span class="comment-prenom">{{ comment.writer.first_name }}</span></b>
+        <div class="comment-div">
+            <b>
+                <img class="user-image"  src="{{ comment.writer.photo.url }}" />
+                <span>{{ comment.writer.first_name }}</span>
+            </b>
             <p>
                 {{ comment.comment_content }}
             </p>
-            <br><br>
         </div>
-
-
-        <div class="replyform">
-
+        <div class="replyform container w-100">
             <b>Répondre</b>
-
-
             <form action="{% url 'replying' %}" method="POST">
-
                 {% csrf_token %}
-
-
-                <textarea required cols="20", rows="10" name="reply_content" > </textarea>
-
-                <input type="hidden" name="comment_id" value="{{comment.id}}" />
-
+                <textarea cols="20" , rows="4" name="reply_content" required></textarea>
+                <input type="hidden" name="token" value="{{comment.token}}" />
                 <br>
-
-              <button type="submit"> Envoyer </button>
-
-
+                <button class="btn btn-primary" type="submit"> Envoyer </button>
             </form>
-
-
         </div>
-
     </div>
     {% endif %}
-
+</section>
 
 {% endblock %}

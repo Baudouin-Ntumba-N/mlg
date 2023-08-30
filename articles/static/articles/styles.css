@@ -1,0 +1,163 @@
+.date{
+    font-style:italic;
+    font-size:12px;
+    font-weight:200px;
+    text-align: center;
+    margin-left:10px;
+}
+.articles {
+  background-color: white;
+  padding: 5px;
+}
+.articles .article {
+  width: 100%px;
+  background-color: #f9f7f7;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+.articles .article img {
+  width: 100%;
+}
+.article-details .image{
+    width:100%;
+
+}
+.article-details .author-image{
+    width:60px;
+    height:60px;
+}
+
+
+.comment-div{
+    background: rgb(250, 250, 250);
+    border:1px solid lightgray;
+    border-radius:10px;
+    padding: 10px;
+}
+.comment-div .comment-content{
+    padding-top:15px;
+    padding-left:10px;
+}
+.comment-div .reply-btn, .comment-div .replies-btn{
+    color: darkblue;
+    border-radius: 5px;
+    border: 0px solid lightgray;
+    font-size:12px;
+}
+
+.comment-div .reply-btn a, .comment-div .replies-btn a{
+    text-decoration: none;
+}
+
+.comment-div .reply-btn{
+    float:left;
+}
+
+.comment-div .replies-btn{
+    float:right;
+}
+
+.replies-div .reply{
+    margin-left:10px;
+    border-radius:10px;
+    padding:10px;
+    background-color:rgb(250, 250, 250);
+}
+
+.article-details .author a{
+    text-decoration:none;
+    font-size:20px;
+}
+.likes-comments-icons{
+    display:flex;
+}
+.likes{
+  display:flex;
+  font-weight:bold;
+  border:0px solid white;
+  margin-left:10px;
+}
+.comments-icon{
+    margin-top:10px;
+    padding-top:10px;
+    padding-left:15%;
+}
+.likes a{
+    text-decoration:none;
+
+}
+.likes a:hover{
+    text-decoration:none;
+
+}
+.likes .likes-count{
+    margin-top:7px;
+    font-size:30px;
+    margin-right:2px;
+}
+
+
+
+@media screen and (min-width:700px) and (max-width:900px){
+
+    .articles {
+    display: grid;
+    grid-template-columns: repeat(2, 55%);
+    grid-gap: 40px;
+    width:75%;
+  }
+  .articles .article {
+
+    max-height: 400px;
+    overflow:hidden;
+    margin-bottom: 30px;
+  }
+   .articles .article .image{
+    width:100%;
+    max-height: 300px;
+    overflow:hidden;
+  }
+  .articles .article img {
+    width: 100%;
+    height: 250px;
+  }
+
+.article-details .image{
+  width: 500px;
+}
+.article-details textarea{
+  width: 500px;
+}
+
+}
+
+
+@media screen and (min-width:900px){
+    section.home-section .articles {
+        width:75%;
+    }
+    .articles{
+
+    display:grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-gap: 20px;
+    width:85%;
+    }
+
+    .articles .article .image{
+    width:100%;
+    max-height: 300px;
+    overflow:hidden;
+    }
+
+  .articles .article img {
+    width: 100%;
+
+  }
+
+  .article-details .image{
+  width: 300px;
+}
+
+
+}

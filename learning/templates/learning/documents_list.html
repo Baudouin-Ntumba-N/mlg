@@ -4,77 +4,51 @@
 {% block title %} Liste des documents{% endblock %}
 {% block content %}
 
+<section class="container col-sm-12">
+<h1>
+    Liste des documents
+</h1>
 
-    <h1>
-        Liste des documents
-    </h1>
+<table class="table table-striped">
+    <thead>
+       <tr><th>Titre</th><th>Format</th><th></th></tr>
+    </thead>
+    <tbody>
+    {% for document in page %}
+    <tr>
+        <td><a href="{% url 'doc-details' document.slug %}">{{document.title}}</a></td>
+        <td>{{ document.doc_format}}</td>
+        <td>
 
-    <table class="documents-list">
-        <thead style="font-weight:bold;">
-            <td>Titre</td><td>Format</td><td></td>
-        </thead>
-        {% for document in page %}
+                <a href="{% url 'doc-details' document.slug %}">
+                   <button class="btn btn-success">
+                       Download
+                   </button>
+                </a>
 
-        <tr class="doc-tr">
-          <td style="text-align:left;"><a href="{% url 'doc-details' document.slug %}">{{document.title}}</a></td>
-         <td style="text-transform:uppercase;">{{ document.doc_format}}</td><td style="text-align:right;"> <button><a href="{% url 'doc-details' document.slug %}"> Download </a></button></td></tr>
-        {% endfor %}
-
-    </table>
+        </td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
 
 <div class="pagination">
 
+    <div class="pagin-cover">
+        {% if page.has_previous %}
+        <div>
+            <button class="btn btn-secondary"><a href="{% url 'documents-list' %}?page={{ page.previous_page_number }}">Précédent</a></button>
+        </div>
+        {% endif %}
 
-        <div class="pagin-cover">
-            <center>
-                {% if page.has_previous %}
-                <div>
-                    <button><a href="{% url 'documents-list' %}?page={{ page.previous_page_number }}">Précédent</a></button>
-                </div>
-                {% endif %}
-
-                {% if page.has_next %}
-                <div>
-                    <button><a href="{% url 'documents-list' %}?page={{ page.next_page_number }}">Suivant</a></button>
-                </div>
-
-                {% endif %}
-
-
-
-
-
-
-            </center>
+        {% if page.has_next %}
+        <div>
+            <button class="btn btn-secondary"><a href="{% url 'documents-list' %}?page={{ page.next_page_number }}">Suivant</a></button>
         </div>
 
-
+        {% endif %}
     </div>
+</div>
 
-
-{% endblock %}
-
-
-{% block aside %}
-<aside>
-
-    <div>
-
-        <ul>
-
-            <h3>
-                COURS
-            </h3>
-
-            <li><b><a href="{% url 'english-lessons' %}">Cours d'anglais</a></b></li>
-
-            <li><b><a href="{% url 'maths-lessons' %}">Cours de Maths</a></b></li>
-
-            <br>
-
-        </ul>
-
-    </div>
-    </aside>
-
+</section>
 {% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base_template.html'%}
+
+{% block title %} Edition {% endblock %}
+
+{% block content %}
+<section class="container">
+        <div class="container">
+
+        <div class="article-form">
+
+            <form enctype="multipart/form-data" method="POST">
+
+                {% csrf_token %}
+
+             {% if form %}
+
+              {{ form.media }}
+
+                <div>
+                    Titre
+                </div>
+
+                <div>
+                    {{form.title}}
+                </div>
+                <br>
+
+
+                <div>
+                    Résumé:
+                </div>
+
+                <div>
+                    {{form.excerpt}}
+                </div>
+                <br>
+
+
+
+                <div>
+                    Catégorie:
+                </div>
+                <div>
+                    {{form.categorie}}
+                </div>
+                <br>
+
+                <div>
+                  Auteur: <input type="hidden" name="author" value="{{user.id}}"/>                </div>
+                <br/>
+
+                <div>
+                   body:
+                </div>
+
+                <div>
+                    {{ form.content }}
+                </div>
+                 <br>
+
+              <div>
+                Ajouter une image:<br>
+                {{ form.photo }}
+              </div>
+              <br>
+
+                 <div>
+
+               Publié: {{ form.published }}
+
+                 </div>
+
+                <br>
+
+
+
+
+             <br/> <button type="submit"> Envoyer </button>
+
+              {%  endif %}
+            </form>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

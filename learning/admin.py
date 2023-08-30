@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from learning.models import Inscrit, InscritAdmin, Categorie, Document, Contact, HomeCoverImage
+from learning import models
 
 
 # Register your models here.
 
 
-admin.site.register(Inscrit, InscritAdmin)
-admin.site.register(Categorie)
-admin.site.register(Document)
-admin.site.register(Contact)
-admin.site.register(HomeCoverImage)
+admin.site.register(models.Inscrit, models.InscritAdmin)
+admin.site.register(models.Categorie)
+admin.site.register(models.Document)
+admin.site.register(models.HomeCoverImage)
+admin.site.register(models.AboutUs)

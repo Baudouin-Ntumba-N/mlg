@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib import admin
-from learning.models import Document
+from learning.models import Inscrit, Document
 from mlgsite.settings import AUTH_USER_MODEL
 from django.utils import timezone
 

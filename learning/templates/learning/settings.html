@@ -1,100 +1,59 @@
 {% extends 'base_template.html' %}
 
-{% block title %} Modifications {% endblock %}
+{% block title %}Paramètres{% endblock %}
 
 {% block content %}
+<div class="container">
 
-{% if user.is_authenticated %}
-<div>
-{% if msm %}
-<span>{{msm}}</span>
-{% endif %}
+    <div class="settings-div col-12 container">
 
+        {% if messages %}
+        {% for message in messages %}
+        <h4 class="text-success">
+            {{ message }}
+        </h4>
+        {% endfor %}
+        {% endif %}
 
-<h2>Modifiez votre compte </h2>
-
-<fieldset class='modify-form'>
-  <form enctype="multipart/form-data" method="POST" action="{% url 'settings' %}">
-
-    {% csrf_token %}
-
-    <div class="modify-form-div">
-
-
-      <div>
-        Nom d'utilisateur: {{ user.username }}
-      </div>
-
-      <div>
-        <input name="username" type="hidden" value="{{ user.username }}" />
-      </div>
-<br>
-
-      <div>
-        Prénom:
-      </div>
-
-      <div>
-        <input name="first_name" type="text" value="{{user.first_name}}" />
-      </div>
- <br>
-
-      <div>
-        nom:
-      </div>
-
-      <div>
-        <input name="last_name" type="text" value="{{user.last_name}}" />
-      </div>
-
- <br>
-
-      <div>
-        Email:
-      </div>
-
-      <div>
-        <input name="email" type="email" value="{{user.email}}" />
-      </div>
-
- <br>
-
-      <div class="photo">
-        <img id="profile-picture" alt="photo" src="{{ user.photo.url }}" width="50" height="50" />
-
-        <label class="file-input">
-         <input type="file" name="photo" accept="image/*" id="id_photo" />
-          Choisir une image
-        </label>
-
-      </div>
+        <fieldset>
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                Nom d'utilisateur: {{ user.username }}
+                {% for field in form %}
 
 
+
+                <br>
+                {% if field.label == 'Photo' %}
+                <div>
+                    Photo de profil: <br>
+                    <img src="{{user.photo.url}}" id="user-photo" class="user-image" />
+                   <label class="photo-label">
+                       <input class="w-25" type="file" accept="image/*" name="photo" id="id_photo" />
+                       <span>Choisir une image</span>
+                   </label>
+                   </div>
+                {% else %}
+                <div>
+                    <label>{{ field.label }}</label>
+                </div>
+
+                <div>{{field}}</div>
+                {% endif %}
+
+                {% endfor %}
+                <br>
+                <div class="container">
+                    <button class="btn btn-primary w-50" type="submit">Enregistrer</button>
+                </div>
+
+            </form>
+        </fieldset>
+        <hr>
+        <div class="p-4 m-2">
+            <a href="{% url 'password-change' %}"><b>Changer le mot de passe</b></a>
+        </div>
     </div>
-
-    <button type="submit" class="save-btn"> Enregistrer </button>
-
-
-  </form>
-
-</fieldset>
-<br>
-
-
-<a href="{% url 'password-change' %}">Changer le mot de passe</a>
-
+    <br>
 </div>
-{% endif %}
-
-<br>
-
-{% if not user.is_authenticated %}
-
-<h3> Vous devez vous <a href="{% url 'login' %}"> connecter </a> pour pouvoir modifier votre compte! </h3>
-
-{% endif %}
-
-
 {% endblock %}
-
-

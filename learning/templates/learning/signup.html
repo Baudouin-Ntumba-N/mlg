@@ -1,104 +1,47 @@
-
 {% extends 'base_template.html' %}
 
-{% block title %} Page d'inscription {% endblock %}
+{% block title %}Inscription{% endblock %}
 
-   {% block content %}
 
-{% if signupError %}
-  <span style="color:red;">{{signupError}}</span>
-{% endif %}
-    <h1>
-        Inscrivez-vous
-    </h1>
+{% block content %}
+<div class="container">
 
-    <fieldset class='signup-form'>
-        <form enctype="multipart/form-data" action="{% url 'signup'%}" method="POST" class="post-form">
+<div class="signup-div col-12 container">
+    <h3>
+      Créez votre compte maintenant
+    </h3>
+    <span class="text-danger">{{error}}</span>
+    <fieldset>
+      <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
 
-            {% csrf_token %}
+        <div>
+            <br>
+            <label>{{ field.label }}</label>
+        </div>
+         {% if field.name == 'password' %}
+         <div class="password-div">
+             {{field}}
+             <a class="eye" href="#!">
+             <img class="eye-image" src="/media/icons/visibility.png" />
+             </a>
+          </div>
+          {% else %}
+          <div> {{field}}</div>
+          {% endif %}
+        {% endfor %}
+        <br>
+        <div class="container">
 
-            <div class="signup-form-div">
-                <div>
-                    Nom d'utilisateur:
-                </div>
+            <button class="btn btn-primary w-50" type="submit">S'inscrire</button>
+        </div>
 
-                <div>
-                  <input type='text' name='username' required />
-                </div>
-
-                <div>
-                    Prénom:
-                </div>
-
-                <div>
-                    <input name="first_name" type="text" required />
-                </div>
-
-                <div>
-                    Nom:
-                </div>
-
-                <div>
-                    <input name="last_name" type="text" required />
-                </div>
-
-                <div>
-                    Email:
-                </div>
-
-                <div>
-                    <input type='email' name='email' required />
-                </div>
-
-                <div>
-                    Mot de passe:
-                </div>
-
-                <div>
-                    <input id="id_password" type='password' name='password' required />
-                    <span style="font-weight: bold; color: rgb(70, 20, 60);">
-                        <span id="eye" style="float: right">Afficher</span>
-                    </span>
-                </div>
-                <br/><br/>
-
-            </div>
-
-            <div class="signup-buttons">
-            <button type="reset" class="reset-btn"> Annuler  </button>
-            <button type="submit" class="save-btn"> Inscription </button>
-       </div>
-          <br>
-
-        </form>
+      </form>
     </fieldset>
 
+</div>
 
-<!-- hide/show password -->
-<script>
+</div>
 
- document.addEventListener("DOMContentLoaded", function(){
-   const password = document.querySelector("#id_password");
-   const eye = document.querySelector("#eye");
-   eye.onclick = function(){
-       if (password.type =="password"){
-       password.type = "text";
-       eye.innerText = "Masquer"
-
-       }else{
-           password.type="password";
-           eye.innerText = "Afficher"
-       }
-   }
-
- });
-
-</script>
-<!-- end hide/show password -->
-
-
-    {% endblock %}
-
-
-
-
+{% endblock %}

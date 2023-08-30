@@ -1,0 +1,19 @@
+{% extends 'base_template.html' %}
+
+{% block title %} A propos {% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="about-us-div container">
+    <div class="p-4">
+      {% autoescape off %}
+      {{ about_us.content }}
+      {% endautoescape %}
+    </div>
+
+  </div>
+<br>
+</div>
+
+{% endblock %}

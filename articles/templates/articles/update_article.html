@@ -1,96 +1,90 @@
- {% extends 'base_template.html'%}
+{% extends 'base_template.html'%}
 
-        {% block title %} Mise à jour de l'article {% endblock %}
+{% block title %} Edition / Mise à jour {% endblock %}
 
-        {% block content %}
+{% block content %}
+     <section class="container">
 
-                <div style="margin-left:20%;" class="details">
+        <div class="article-update w-100">
 
-                <div  class="article-form">
+            <form enctype="multipart/form-data" method="POST">
 
+                {% csrf_token %}
 
+             {% if form %}
 
+              {{ form.media }}
 
-                    <form enctype="multipart/form-data" method="POST">
-
-                        {% csrf_token %}
-
-                     {% if form %}
-                 {{ form.media }}
-
-
-                        <div>
-                            Titre
-                        </div>
-
-                        <div>
-                   {{ form.title }}
-                        </div>
-                        <br>
-                        <div>
-                         Petit résumé:
-                        </div>
-                        <div>
-                            {{ form.topic }}
-                        </div>
-                        <br>
-
-                        <div>
-                            Catégorie:
-                        </div>
-                        <div>
-                            {{form.categorie}}
-                        </div>
-                        <br>
-
-                        <div>
-                          Auteur:<br/> {{ form.author }}
-                        </div>
-                        <br/>
-
-                        <div>
-                           body:
-                        </div>
-
-                        <div>
-                            {{ form.content }}
-                        </div>
-                         <br>
-
-                      <div>
-                        Ajouter une image:<br>
-                        {{ form.photo }}
-                      </div>
-                      <br>
-
-                         <div>
-
-                       Publié: {{ form.published }}
-
-                         </div>
-
-                        <br>
-
-
-
-
-                     <br/> <button type="submit"> Enregistrer </button>
-
-                      {%  endif %}
-                    </form>
-
-
+                <div>
+                    Titre
                 </div>
 
-            </div>
+                <div>
+                    {{form.title}}
+                </div>
+                <br>
+
+                <div>
+                    Résumé:
+                </div>
+
+                <div>
+                    {{form.excerpt}}
+                </div>
+                <br>
 
 
+                <div>
+                    Catégorie:
+                </div>
+                <div>
+                    {{form.categorie}}
+                </div>
 
-        {% endblock %}
+                <br/>
+
+                <br/>
+
+                <div>
+                   body:
+                </div>
+
+                <div>
+                    {{form.content}}
+                </div>
+                 <br>
+
+              <div>
+                Ajouter une image:<br>
+                {{ form.photo }}
+              </div>
+              <br>
+
+                 <div>
+
+               Publié: {{ form.published }}
+
+                 </div>
+
+                <br>
 
 
-        {% block aside %}
-        <aside></aside>
+             <br/> <button class="btn btn-primary" type="submit"> Envoyer </button>
 
-        {% endblock %}
+              {%  endif %}
+            </form>
 
+
+        </div>
+     <div>
+         <br>
+
+         <button class="btn btn-danger">
+             supprimer cet article
+         </button>
+         </div>
+
+
+</section>
+
+{% endblock %}

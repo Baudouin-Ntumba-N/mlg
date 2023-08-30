@@ -4,50 +4,34 @@
 {% block title %} Le panier {% endblock %}
 
 {% block content %}
-
-<h1>
+<section class="container cart">
+<div>
+<h2>
     Votre panier
-</h1>
-<table class="documents-list" style="width:80%;border-collapse:collapse;" border="1">
-    <thead style="border:2px solid rgb(70, 20, 60);font-weight:bold;">
-        <td>Document</td><td>Quantité</td><td>Coût unitaire</td><td>Total</td>
+</h2>
+<table class="table table-striped">
+    <thead>
+        <th>Document</th><th>Format</th><th>Coût</th>
     </thead>
     {% for order in orders %}
 
-    <tr class="doc-tr"><td>{{order.document.title}}</td> <td>{{order.quantity}}</td><td>{{order.unit_price}} $</td><td>{{ order.order_cost }} $</td></tr><br>
+    <tr class="doc-tr"><td>{{ order.document.title}}</td> <td>{{order.document.doc_format }}</td><td>{{order.unit_price}} $</td></tr><br>
 
     {% endfor %}
 </table>
 
-<div style="width:80%;font-weight:bold;color:darkgreen;border:2px solid darkgreen;">
+<div class="text-success border">
     Coût total: {{total_cost}} $
 </div>
-
+    <br>
+     <button class="btn btn-success p-2">
+         Passer à l'achat
+    </button>
 <br>
-
-<button style="background:white;border:2px solid darkred;"><a style="color:darkred;text-decoration:none;font-weight:bold;" href="{% url 'delete-cart' %}">Supprimer le panier</a></button>
+<br>
+<button class="border border-1 btn-danger"><a href="{% url 'delete-cart' %}">Supprimer le panier</a></button>
 <hr>
-
-{% endblock %}
-
-
-{% block aside %}
-<div>
-
-    <ul>
-
-        <h3>
-            COURS
-        </h3>
-
-        <li><b><a href="{% url 'english-lessons' %}">Cours d'anglais</a></b></li>
-
-        <li><b><a href="{% url 'maths-lessons' %}">Cours de Maths</a></b></li>
-
-        <br>
-
-    </ul>
-
 </div>
+</section>
 
 {% endblock %}

@@ -1,173 +1,124 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>{% block titre %}{% endblock %}</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-     <link rel="stylesheet" href="{% static 'learning/main1.css' %}" type="text/css" />
-     <link rel="stylesheet" href="{% static 'learning/main.css' %}" type="text/css" />
+        <link
+              rel="stylesheet"
+              href="{% static 'learning/bootstrap.min.css' %}" />
 
+        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+-->
+        <link
+              rel="stylesheet"
+              href="{% static 'learning/main.css' %}"
+              type="text/css" />
+        <link
+              rel="stylesheet"
+              href="{% static 'articles/styles.css' %}"
+              type="text/css" />
 
+        <script src="{% static 'learning/main.js' %}"></script>
 
+        <script src="{% static 'learning/eye-on-Off.js' %}"></script>
 
- <!--  javaScrit start -->
+    </head>
+    <body>
+        <div class="container-fluid">
+            <header class="header row">
+                <div class="logo col-lg-2"><a href="{% url 'home' %}">MLG</a></div>
+                <div class="menu col-lg-8">
+                    <nav class="navbar">
+                        <a href="{% url 'home' %}">
+                            <div>Accueil</div>
+                        </a>
 
-<script>
-//afficher/ cacher le menu
-document.addEventListener('DOMContentLoaded', function () {
-
-    if (window.innerWidth >= 900) {
-
-        document.querySelector('#menu').style.display = 'block';
-
-    } else {
-
-        document.querySelector('#menu').style.display = 'none';
-    }
-
-
-    let a = 0;
-
-    document.querySelector('#menu-button').onclick = function() {
-
-        if (a == 1) {
-            document.querySelector('#menu').style.display = 'none';
-            document.querySelector("#menuImage").style.display = "block";
-            document.querySelector("#closeImage").style.display = "none";
-            a = 0;
-
-        } else {
-            document.querySelector('#menu').style.display = 'block';
-            document.querySelector("#menuImage").style.display = "none";
-            document.querySelector("#closeImage").style.display = "block";
-            a = 1;
-        }
-
-    }
+                        <a href="{% url 'contact' %}">
+                            <div>Contact</div>
+                        </a>
 
 
-  // preview pre-uploaded profile image
-   const fileinput = document.querySelector("#id_photo");
-   const profilePhoto = document.querySelector("#profile-picture");
-
-   fileinput.onchange = function(){
-       const [file] = fileinput.files;
-       if (file) {
-           profilePhoto.src = URL.createObjectURL(file)
-
-       }
-   }
-
-})
-
-    </script>
+                        <a href="{% url 'cours' %}">
+                            <div>Cours </div>
+                        </a>
 
 
-    <!-- javaScript end -->
+                        <a href="{% url 'articles'%}">
+                            <div>Articles</div>
+                        </a>
+
+                        <a href="{% url 'documents-list' %}"><div>Documents</div></a>
 
 
 
-</head>
-<body>
+                        <a href="{% url 'about' %}">
+                            <div> A propos </div>
+                        </a>
 
-    <div id="conteneur">
-        <center>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'settings' %}">
+                            <div class="settings">Paramètres</div>
+                        </a>
+                        <a href="{% url 'logout' %}">
+                            <div class="login">Se déconnecter</div>
+                        </a>
 
-      <header class="row">
-                  <div class="col-4" id="logo">
-                    <a href="{% url 'home' %}" id="logo-link">
-                        <div style="background-color:white;border:3px solid rgb(70, 20, 60);border-left:0px solid blue; border-right:0px solid blue;border-radius:10px 10px 10px 10px;">
-                        	<span style="font-size:25px; font-weight:500;color:black">ML<span style="color:rgb(70, 20, 60);color:rgb(70, 20, 60);font-size:25px;">G</span> </span>
-                        </div>
-                    </a>
-                    <a href="{% url 'home' %}">
-                        <span class="mlg-meaning">Modern Learning Ground</span></a>
+                        {% else %}
+                        <a href="{% url 'signup' %}">
+                            <div class="signup">S'inscrire</div>
+                        </a>
+
+                        <a href="{% url 'login' %}">
+                            <div class="login">Se connecter</div>
+                        </a>
+
+                        {% endif %}
+                    </nav>
                 </div>
-                <nav class="col-8">
-                    <button id="menu-button">
-                        <img id="menuImage" height="40" src="{% static 'learning/icons/svg/menu_FILL0.svg' %}" />
-                        <img id="closeImage" height="40" src="{% static 'learning/icons/svg/close_FILL0.svg' %}" />
-                    </button>
-                </nav>
-                {% include '_menu.html' %}
+                <div class="menu-button-container">
+                    <button class="btn" id="menu-button">Menu</button>
+                </div>
             </header>
+            <div class="decor-bar text-center">
+                {% if user.cart %}
+                <div class="cart bg-success container w-50">
+                    <a href="{% url 'cart' %}">
+                        Voir le panier ({{ user.cart.orders.count}})
+                    </a>
+                </div>
+                {% endif %}
+            </div>
 
+            <div class="blank-bar">
 
-<div class="search">
+            </div>
+            <div class="row">
+                {% block content %} {% endblock %}
 
-    <div class="intro-mlg">
-    <h3> Développez vos compétences!</h3>  </div>
-
-
-
-    {% if user.cart %}
-     <div style="background:white;border-radius:50px;width:50%;">
-
-      <a style="text-decoration:none;color:darkgreen;font-weight:bold;" href="{% url 'cart' %}">Voir le panier ({{ user.cart.orders.count}})</a>
-
-     </div>
-      {% endif %}
-
-      {% if login_msg %}
-       <div style="background:white;font-size:18px;border-radius:50px;width:50%;">
-
-         {{user.first_name}}, tu es connecté(e)...
-
+            </div>
+            {% block aside %} {% endblock %}
+            <footer class="row">
+                <div class="w-100 container">
+                    <br>
+                    <p>
+                        Conditions d'utilisations
+                    </p>
+                    copyright © MLG <span id="current-year"></span>
+                </div>
+            </footer>
         </div>
-      {% endif %}
- </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
 
-        <section>
-       {% block content %}
+                let date = new Date();
 
+                document.querySelector("#current-year").innerHTML = date.getFullYear();
 
-          {% endblock %}
+            });
+        </script>
 
-</section>
-{% block edition %} {% endblock %}
-
-          {% block aside %} {% endblock %}
-
-
-
-
-          <footer>
-
-        <br>
-            {% if user.is_authenticated %}
-<a href="{% url 'logout' %}">Déconnexion</a>
-{% endif %}
-{% if not user.is_authenticated %}
-<a href="{% url 'login' %}">Connexion</a>
-{% endif %}
-            <br>
-            <br>
-            <br>
-
-<a href="{% url 'settings' %}">Paramètres</a>
-<br>
-
-           {% include 'footer_links.html' %}
-
-
-<br>
-
-<a href="#!">Conditions d'utilisation </a> <br>
-
-<br>
-
-© MLG
-
-          </footer>
-        </center>
-
-    </div>
-
-
-
-
-</body>
+    </body>
 </html>

@@ -1,21 +1,20 @@
 {% extends 'base_template.html'%}
-{% load static %}
+
 {% block title %} Contact {% endblock %}
 {% block content %}
 
-<section>
-    <span style="color:green;">{{msg_sent}}</span>
+<div class="container">
+    <span style="text-success">{{msg_sent}}</span>
     <h1>
         Contactez-nous
     </h1>
 
-
-    <fieldset class="contact-form-fieldset">
+    <div class="contact-form-fieldset w-100">
 
         <form method="POST" class="contact-form">
 
             {% csrf_token %}
-            <div class="contact-div">
+            <div class="contact-div w-100">
 
                 <div>
                     Sujet
@@ -35,7 +34,7 @@
                 <br>
 
                 <div>
-                   Expéditeur(votre e-mail ne sera pas divulgué):
+                   Votre adresse email:
                 </div>
 
                 <div>
@@ -43,31 +42,28 @@
                 </div>
                 <br>
 
-                <div style="float:left;">
+                <div>
                     Cochez si vous voulez avoir une copie: {{form.cc_myself}}
                 </div>
-                <br><br><br>
+                <br>
                 <div>
-                    <br><button style="float:right;" type="submit" class="send-btn">Envoyer</button>
+                    <button type="submit" class="btn btn-primary send-btn">Envoyer</button>
                 </div>
             </div>
 
         </form>
 
-    </fieldset>
+    </div>
     <br>
 
 
 
-    Tél: +243973683497 <br><br>
+    Tél: +243895747312 <br><br>
 
-    <a href=" https://facebook.com/MLG-Learning-English-106973327498292/?" target="_blank"><img src="{% static 'learning/fcbk.JPG' %}" width="35" height="35" /></a>
+    <a href=" https://www.facebook.com/MLG-Learning-English-106973327498292/?" target="_blank"><img src="/media/images/fcbk.JPG" width="35" height="35" /></a>
 
-    <a href="https://wa.me/243895747312"><img src="{% static 'learning/whatsapplogo.JPG' %}" width="35" height="35" /></a>
+    <a href="http://www.whatsapp.com"><img src="/media/images/whatsapplg.JPG" width="35" height="35" /></a>
 
-    <a href="mailto:bntumbanyembwe@gmail.com"><img src="{% static 'learning/emaillg.JPG' %}" width="35" height="35" /></a>
-
-
-</section>
+</div>
 
 {% endblock %}

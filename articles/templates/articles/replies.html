@@ -4,81 +4,83 @@
 
 {% block content %}
 
-
+<section class="container">
 
     <div class="replies-div">
         {% if authen %}
-        <b style="color:violet;">{{authen}}</b>
+        <b>{{authen}}</b>
         {% endif %}
-        <div style="text-align:left;" class="comments-block">
-            <b><img src="{{ comment.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="comment-prenom2">{{comment.writer.first_name}}</span></b>
+        <div class="comment-div">
+            <a href="#!">
+
+            <b>
+              <img class="user-image" src="{{comment.writer.photo.url }}" />
+              <span>{{comment.writer.first_name}} {{comment.writer.last_name}}
+              </span>
+            </b>
+            </a>
             <br>
             {{comment.comment_content}}
         </div>
-
-        <b style="float:left;">Réponses</b><br><br>
+         <br>
+        <b>Réponses</b><br>
         {% if replies %}
 
 
         {% for reply in replies %}
 
-        {%if reply.writer.id == 1 %}
+        {%if reply.writer.id == comment.commented_article.author.id %}
 
         <div class="reply">
-
-            <b><img src="{{ reply.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.writer.first_name}} <span style="color:white;font-size:12px;padding:3px;background-color:darkgreen;"> Auteur</span></span></b><br><br>
-
+            <a href="#!">
+            <b>
+                <img class="user-image" src="{{ reply.writer.photo.url }}" />
+                <span class="replier-first_name">
+                    {{reply.writer.first_name}} {{ reply.writer.last_name }}
+                 <span class="badge-success"> Auteur</span></span>
+            </b>
+            </a>
+            <br><br>
             {% autoescape off %}
 
-            {{reply.comment_content}}<br>
-
-          <br><span style="color:gray;font-size:13px;">{{reply.post_date}} UTC </span>
-
-            {% endautoescape %}
-
-          <br>
-
-          {% if user.id == 1 %}
-          <br>
-          <a style="color:darkblue;font-weight:bold;" href="{% url 'delete-reply' reply.id %}">Supprimer</a>
-          {% endif %}
-
-        </div>
-        {% endif %}
-
-        {% if reply.writer.id != 1 %}
-
-        <div class="reply">
-            <b><img src="{{ reply.writer.photo.url }}" style="width:40px;height:40px;" /> <span class="replier-prenom">{{reply.writer.first_name}}</span></b><br><br>
-
-            {% autoescape off %}
-
-            {{reply.comment_content}}<br>
-
-            <br> <span style="color:gray;font-size:13px;">{{reply.post_date}} UTC </span>
-
-            {% endautoescape %}
-
-
+            <p>
+               {{reply.comment_content}}
+            </p>
             <br>
+            <span class="date">{{reply.post_date}} GMT</span>
 
-          {% if user.id == 1 %}
-          <br>
-          <a  style="color:darkblue;font-weight:bold;" href="{% url 'delete-reply' reply.id %}">Supprimer</a>
-          {% endif %}
+            {% endautoescape %}
 
-        </div>
+        </div><br>
+        {% else %}
+
+        <div class="reply">
+            <a href="#!">
+            <b>
+                <img class="user-image" src="{{ reply.writer.photo.url }}"/>
+                <span class="replier-prenom">
+                    {{reply.writer.first_name}} {{reply.writer.last_name}}
+                </span>
+            </b>
+            </a>
+            <br><br>
+
+            {% autoescape off %}
+
+            {{reply.comment_content}}
+            <br> <span class="date">{{reply.post_date}} UTC </span>
+
+            {% endautoescape %}
+
+        </div><br>
 
         {% endif %}
 
 
-     {% endfor %}
-
-    {% endif %}
+        {% endfor %}
 
 
-
-        {% if not replies %}
+       {% else %}
 
         Aucune réponse!
 
@@ -96,14 +98,15 @@
 
                 {% csrf_token %}
 
-                <input type="hidden" name="comment_id" value="{{comment.id}}" />
+
+                <input type="hidden" name="token" value="{{comment.token}}" />
 
                 <div>
-                    <textarea cols="20", rows="10" name="reply_content" required > </textarea>
+                    <textarea id="reply-textarea" cols="20" class="form-control" rows="4" name="reply_content" required ></textarea>
 
                     <br>
 
-                    <button type="submit">Envoyer</button>
+                    <button class="btn btn-primary" type="submit">Envoyer</button>
 
                 </div>
 
@@ -116,6 +119,6 @@
 
     </div>
 
-
+</section>
 
 {% endblock %}
